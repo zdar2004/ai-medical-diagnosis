@@ -51,7 +51,11 @@ class AuthService:
     async def register(self, payload: RegisterRequest) -> UserResponse:
         email = payload.email.lower().strip()
 
+        logger.warning(f"EMAIL = {email}")
+
         existing = await self.users.find_one({"email": email})
+
+        logger.warning(f"EXISTING = {existing}")
 
         if existing:
             raise HTTPException(

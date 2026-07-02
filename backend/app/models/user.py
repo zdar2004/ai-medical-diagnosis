@@ -1,15 +1,12 @@
-from datetime import datetime, timezone
+from datetime import datetime
 from enum import Enum
 from typing import Optional
-import string
 
 from bson import ObjectId
 from pydantic import BaseModel, EmailStr, Field, field_validator
 
 
-# ──────────────────────────────────────────────────────────────
-# User Roles
-# ──────────────────────────────────────────────────────────────
+# ── Role enum ─────────────────────────────────────────────────────────────────
 
 class UserRole(str, Enum):
     ADMIN = "admin"
@@ -17,118 +14,95 @@ class UserRole(str, Enum):
     STAFF = "staff"
 
 
-# ──────────────────────────────────────────────────────────────
-# MongoDB ObjectId Helper
-# ──────────────────────────────────────────────────────────────
+# ── ObjectId helper ───────────────────────────────────────────────────────────
 
 class PyObjectId(str):
-    @classmethod
-    def __get_validators__(cls):
-        yield cls.validate
+    """
+    Serialises MongoDB ObjectId to/from a plain string.
+    Implemented with the Pydantic v2 native hook to avoid the v1-compat
+    deprecation warning produced by __get_validators__.
+    """
 
     @classmethod
-    def validate(cls, value, info=None):
-        if isinstance(value, ObjectId):
-            return str(value)
+    def __get_pydantic_core_schema__(cls, source_type, handler):
+        from pydantic_core import core_schema
 
-        if not ObjectId.is_valid(value):
-            raise ValueError("Invalid ObjectId")
+        return core_schema.no_info_plain_validator_function(
+            cls.validate,
+            serialization=core_schema.to_string_ser_schema(),
+        )
 
-        return str(value)
+    @classmethod
+    def validate(cls, v):
+        if not ObjectId.is_valid(v):
+            raise ValueError(f"Invalid ObjectId: {v}")
+        return str(v)
 
-# ──────────────────────────────────────────────────────────────
-# MongoDB User Document
-# ──────────────────────────────────────────────────────────────
+
+# ── Internal DB document (never sent to client) ───────────────────────────────
 
 class UserInDB(BaseModel):
+    """Mirrors the exact shape stored in MongoDB."""
+
     id: Optional[PyObjectId] = Field(default=None, alias="_id")
-
     full_name: str
-    email: EmailStr
+    email: str
     hashed_password: str
-
     role: UserRole = UserRole.STAFF
     is_active: bool = True
-
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
     last_login: Optional[datetime] = None
 
-    model_config = {
-        "populate_by_name": True,
-        "arbitrary_types_allowed": True,
-    }
+    model_config = {"populate_by_name": True, "arbitrary_types_allowed": True}
 
 
-# ──────────────────────────────────────────────────────────────
-# Register Request
-# ──────────────────────────────────────────────────────────────
+# ── Request schemas (inbound) ─────────────────────────────────────────────────
 
 class RegisterRequest(BaseModel):
-    full_name: str = Field(..., min_length=2, max_length=100)
-    email: EmailStr
-    password: str = Field(..., min_length=8, max_length=128)
-
-    # Only admin should assign roles later.
-    role: UserRole = UserRole.STAFF
+    full_name: str = Field(..., min_length=2, max_length=100, examples=["Dr. Sarah Khan"])
+    email: EmailStr = Field(..., examples=["sarah@medisys.ai"])
+    password: str = Field(..., min_length=8, max_length=128, examples=["StrongPass123!"])
+    role: UserRole = Field(default=UserRole.STAFF, examples=["doctor"])
 
     @field_validator("password")
     @classmethod
-    def validate_password(cls, password: str):
-
-        if not any(c.isupper() for c in password):
+    def password_strength(cls, v: str) -> str:
+        if not any(c.isupper() for c in v):
             raise ValueError("Password must contain at least one uppercase letter.")
-
-        if not any(c.islower() for c in password):
-            raise ValueError("Password must contain at least one lowercase letter.")
-
-        if not any(c.isdigit() for c in password):
+        if not any(c.isdigit() for c in v):
             raise ValueError("Password must contain at least one digit.")
+        return v
 
-        if not any(c in string.punctuation for c in password):
-            raise ValueError("Password must contain at least one special character.")
-
-        return password
-
-
-# ──────────────────────────────────────────────────────────────
-# Login Request
-# ──────────────────────────────────────────────────────────────
 
 class LoginRequest(BaseModel):
-    email: EmailStr
-    password: str
+    email: EmailStr = Field(..., examples=["sarah@medisys.ai"])
+    password: str = Field(..., examples=["StrongPass123!"])
 
 
-# ──────────────────────────────────────────────────────────────
-# Safe User Response
-# ──────────────────────────────────────────────────────────────
+# ── Response schemas (outbound) ───────────────────────────────────────────────
 
 class UserResponse(BaseModel):
+    """Safe user representation — no password hash."""
+
     id: str
     full_name: str
-    email: EmailStr
+    email: str
     role: UserRole
     is_active: bool
     created_at: datetime
     last_login: Optional[datetime] = None
 
 
-# ──────────────────────────────────────────────────────────────
-# JWT Token Response
-# ──────────────────────────────────────────────────────────────
-
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
-    expires_in: int
+    expires_in: int          # seconds
     user: UserResponse
 
 
-# ──────────────────────────────────────────────────────────────
-# Generic API Response
-# ──────────────────────────────────────────────────────────────
-
 class MessageResponse(BaseModel):
+    """Generic success/error envelope."""
+
     success: bool
     message: str

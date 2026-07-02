@@ -24,7 +24,12 @@ def hash_password(password: str) -> str:
 
 
 def verify_password(password: str, hashed_password: str) -> bool:
-    """Verify password against stored hash."""
+    print("Entered password:", password)
+    print("Entered length:", len(password))
+
+    print("Hash:", hashed_password)
+    print("Hash length:", len(hashed_password))
+
     return pwd_context.verify(password, hashed_password)
 
 

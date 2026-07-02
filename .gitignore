@@ -146,7 +146,7 @@ activemq-data/
 
 # SageMath parsed files
 *.sage.py
-
+cd C:\Users\MUHAMMAD AKRAM\ai-medical-diagnosis
 # Environments
 .env
 .envrc

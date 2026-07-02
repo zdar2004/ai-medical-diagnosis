@@ -1,0 +1,805 @@
+{
+  "_meta": {
+    "schema_version": "1.0",
+    "last_updated": "2026-06-30",
+    "total_diseases": 26,
+    "disclaimer": "All medication information is provided for informational purposes only and does not constitute a prescription. Consult a licensed healthcare provider before starting, stopping, or changing any medication."
+  },
+  "common cold": {
+    "severity": "low",
+    "specialist": "General Practitioner",
+    "recommended_tests": [
+      "Clinical examination (diagnosis is usually clinical)",
+      "Throat swab if bacterial infection is suspected"
+    ],
+    "possible_medications": [
+      "Decongestants (e.g. pseudoephedrine, oxymetazoline nasal spray)",
+      "Antihistamines (e.g. loratadine, cetirizine)",
+      "Analgesics / antipyretics (e.g. paracetamol, ibuprofen)",
+      "Cough suppressants (e.g. dextromethorphan)"
+    ],
+    "home_care": [
+      "Rest and increase fluid intake",
+      "Inhale steam or use a humidifier to ease congestion",
+      "Gargle warm salt water for sore throat relief",
+      "Honey and lemon in warm water for cough relief"
+    ],
+    "warning_signs": [
+      "Fever lasting more than 4 days",
+      "Difficulty breathing or chest pain",
+      "Symptoms worsening after 10 days instead of improving"
+    ],
+    "follow_up": "See a doctor if symptoms persist beyond 10 days or worsen at any point.",
+    "hospitalization_required": false
+  },
+  "influenza": {
+    "severity": "moderate",
+    "specialist": "General Practitioner / Infectious Disease Specialist",
+    "recommended_tests": [
+      "Rapid Influenza Diagnostic Test (RIDT)",
+      "PCR (RT-PCR) for influenza type and subtype",
+      "Chest X-ray if pneumonia is suspected"
+    ],
+    "possible_medications": [
+      "Antivirals (e.g. oseltamivir, zanamivir) if started within 48 hours of symptom onset",
+      "Analgesics / antipyretics (e.g. paracetamol, ibuprofen)"
+    ],
+    "home_care": [
+      "Strict bed rest",
+      "Stay well hydrated",
+      "Isolate from others for at least 24 hours after fever resolves",
+      "Use cool compresses and light clothing to manage high fever"
+    ],
+    "warning_signs": [
+      "Difficulty breathing or shortness of breath",
+      "Persistent chest pain or pressure",
+      "Severe or persistent vomiting",
+      "Confusion or sudden dizziness"
+    ],
+    "follow_up": "Review with a doctor if fever persists beyond 5 days or breathing difficulty develops.",
+    "hospitalization_required": false
+  },
+  "pneumonia": {
+    "severity": "high",
+    "specialist": "Pulmonologist / Infectious Disease Specialist",
+    "recommended_tests": [
+      "Chest X-ray",
+      "Complete Blood Count (CBC) with differential",
+      "Sputum culture and sensitivity",
+      "Pulse oximetry / Arterial Blood Gas (ABG)"
+    ],
+    "possible_medications": [
+      "Antibiotics (e.g. amoxicillin, azithromycin, doxycycline) for bacterial pneumonia",
+      "Antivirals (e.g. oseltamivir) if viral pneumonia is confirmed",
+      "Antipyretics (e.g. paracetamol)",
+      "Oxygen therapy for low blood oxygen levels"
+    ],
+    "home_care": [
+      "Complete the full prescribed antibiotic course without skipping doses",
+      "Rest completely and avoid physical exertion",
+      "Drink plenty of fluids to loosen secretions",
+      "Sleep propped upright to ease breathing"
+    ],
+    "warning_signs": [
+      "Worsening shortness of breath",
+      "Bluish lips or fingertips",
+      "High fever that does not respond to medication",
+      "Confusion or extreme drowsiness"
+    ],
+    "follow_up": "Seek immediate medical care if breathlessness worsens at any point during treatment.",
+    "hospitalization_required": true
+  },
+  "asthma": {
+    "severity": "moderate",
+    "specialist": "Pulmonologist / Allergist",
+    "recommended_tests": [
+      "Spirometry (FEV1/FVC ratio)",
+      "Peak Expiratory Flow (PEF) monitoring",
+      "Allergy skin-prick testing or specific IgE",
+      "Chest X-ray to exclude other causes"
+    ],
+    "possible_medications": [
+      "Short-acting beta-2 agonists (e.g. salbutamol inhaler) for rapid relief",
+      "Inhaled corticosteroids (e.g. beclomethasone, fluticasone) for prevention",
+      "Long-acting beta-2 agonists (e.g. salmeterol) combined with inhaled corticosteroids",
+      "Leukotriene receptor antagonists (e.g. montelukast)"
+    ],
+    "home_care": [
+      "Identify and avoid personal triggers (dust, pollen, smoke, cold air)",
+      "Keep a symptom and peak flow diary",
+      "Always carry a reliever inhaler",
+      "Maintain a clean, dust-free home environment"
+    ],
+    "warning_signs": [
+      "Reliever inhaler not relieving symptoms",
+      "Difficulty speaking in full sentences due to breathlessness",
+      "Lips or fingertips turning blue",
+      "Severe chest tightness that does not improve"
+    ],
+    "follow_up": "Review inhaler technique and control with a doctor every 3-6 months, or sooner if symptoms worsen.",
+    "hospitalization_required": true
+  },
+  "heart disease": {
+    "severity": "critical",
+    "specialist": "Cardiologist",
+    "recommended_tests": [
+      "12-lead Electrocardiogram (ECG/EKG)",
+      "Cardiac biomarkers (Troponin I/T)",
+      "Echocardiogram",
+      "Coronary Angiography",
+      "Lipid panel and blood glucose"
+    ],
+    "possible_medications": [
+      "Antiplatelets (e.g. aspirin, clopidogrel)",
+      "Statins (e.g. atorvastatin, rosuvastatin)",
+      "Beta-blockers (e.g. metoprolol, carvedilol)",
+      "ACE inhibitors / ARBs (e.g. ramipril, losartan)",
+      "Nitrates (e.g. glyceryl trinitrate) for anginal chest pain"
+    ],
+    "home_care": [
+      "Adopt a heart-healthy diet low in saturated fat and sodium",
+      "Engage in regular moderate exercise as advised by a cardiologist",
+      "Stop smoking completely",
+      "Control blood pressure, cholesterol, and blood sugar diligently"
+    ],
+    "warning_signs": [
+      "Sudden severe chest pain or pressure",
+      "Pain radiating to the arm, jaw, or back",
+      "Shortness of breath at rest",
+      "Sudden sweating, nausea, or fainting"
+    ],
+    "follow_up": "Call emergency services immediately for sudden chest pain; otherwise attend regular cardiology review as scheduled.",
+    "hospitalization_required": true
+  },
+  "hypertension": {
+    "severity": "moderate",
+    "specialist": "Cardiologist / General Practitioner",
+    "recommended_tests": [
+      "Blood pressure measurement on multiple separate days",
+      "Ambulatory Blood Pressure Monitoring (24-hour)",
+      "Renal function tests and electrolytes",
+      "Fasting glucose and lipid panel",
+      "ECG"
+    ],
+    "possible_medications": [
+      "ACE inhibitors (e.g. ramipril, lisinopril)",
+      "ARBs (e.g. losartan, valsartan)",
+      "Calcium channel blockers (e.g. amlodipine)",
+      "Thiazide-like diuretics (e.g. indapamide)"
+    ],
+    "home_care": [
+      "Monitor blood pressure at home and keep a log",
+      "Reduce dietary sodium intake",
+      "Follow a diet rich in fruits, vegetables, and low-fat dairy",
+      "Maintain a healthy weight through regular physical activity",
+      "Limit alcohol intake"
+    ],
+    "warning_signs": [
+      "Severe headache with blurred vision",
+      "Chest pain or shortness of breath",
+      "Sudden numbness or weakness on one side",
+      "Blood pressure reading above 180/120 mmHg"
+    ],
+    "follow_up": "Review blood pressure control with a doctor every 1-3 months until stable, then every 6-12 months.",
+    "hospitalization_required": false
+  },
+  "stroke": {
+    "severity": "critical",
+    "specialist": "Neurologist / Stroke Specialist",
+    "recommended_tests": [
+      "Non-contrast CT scan of brain",
+      "MRI brain with diffusion-weighted imaging",
+      "CT or MR Angiography",
+      "12-lead ECG",
+      "Carotid Doppler Ultrasound"
+    ],
+    "possible_medications": [
+      "IV thrombolysis (e.g. alteplase) within 4.5 hours of symptom onset for ischaemic stroke",
+      "Antiplatelets (e.g. aspirin, clopidogrel) for secondary prevention",
+      "Anticoagulants (e.g. apixaban, warfarin) for atrial fibrillation-related stroke",
+      "Statins (e.g. atorvastatin) for secondary prevention"
+    ],
+    "home_care": [
+      "Attend all physiotherapy, speech therapy, and occupational therapy sessions",
+      "Modify the home to prevent falls",
+      "Adhere strictly to all secondary prevention medications",
+      "Address modifiable risk factors such as blood pressure and smoking"
+    ],
+    "warning_signs": [
+      "Face drooping on one side",
+      "Arm weakness or numbness",
+      "Slurred or difficult speech",
+      "Sudden severe headache or vision loss"
+    ],
+    "follow_up": "Call emergency services immediately at the first sign of stroke symptoms (FAST: Face, Arm, Speech, Time).",
+    "hospitalization_required": true
+  },
+  "diabetes": {
+    "severity": "moderate",
+    "specialist": "Endocrinologist / Diabetologist",
+    "recommended_tests": [
+      "Fasting Plasma Glucose (FPG)",
+      "HbA1c (Glycated Haemoglobin)",
+      "Oral Glucose Tolerance Test (OGTT)",
+      "Urine Albumin:Creatinine Ratio",
+      "Annual dilated eye examination"
+    ],
+    "possible_medications": [
+      "Insulin (basal-bolus regimen) for Type 1 diabetes",
+      "Metformin as first-line therapy for Type 2 diabetes",
+      "SGLT2 inhibitors (e.g. empagliflozin, dapagliflozin)",
+      "GLP-1 receptor agonists (e.g. semaglutide, liraglutide)"
+    ],
+    "home_care": [
+      "Monitor blood glucose regularly as directed",
+      "Follow a low-glycaemic-index, low-refined-sugar diet",
+      "Exercise regularly to improve insulin sensitivity",
+      "Inspect feet daily for cuts, blisters, or ulcers",
+      "Take medications consistently without skipping doses"
+    ],
+    "warning_signs": [
+      "Blood glucose persistently above target range",
+      "Signs of severe dehydration or confusion",
+      "Non-healing wounds or ulcers, especially on the feet",
+      "Fruity-smelling breath with rapid breathing (possible ketoacidosis)"
+    ],
+    "follow_up": "Attend HbA1c review every 3-6 months and annual eye, kidney, and foot screening.",
+    "hospitalization_required": false
+  },
+  "hypothyroidism": {
+    "severity": "moderate",
+    "specialist": "Endocrinologist",
+    "recommended_tests": [
+      "Thyroid Stimulating Hormone (TSH)",
+      "Free T4 (FT4)",
+      "Anti-TPO antibodies",
+      "Lipid panel",
+      "Complete Blood Count"
+    ],
+    "possible_medications": [
+      "Levothyroxine (synthetic T4) as lifelong replacement therapy",
+      "Liothyronine (T3) occasionally added in select cases"
+    ],
+    "home_care": [
+      "Take levothyroxine at the same time every day on an empty stomach",
+      "Avoid taking calcium, iron, or antacids close to the medication dose",
+      "Eat a balanced diet supporting thyroid health",
+      "Engage in regular gentle exercise to manage fatigue and weight gain"
+    ],
+    "warning_signs": [
+      "Severe fatigue or difficulty staying awake",
+      "Significant unexplained weight gain",
+      "Slow heart rate with chest discomfort",
+      "Swelling of the face or extremities"
+    ],
+    "follow_up": "Check TSH 6-8 weeks after any dose change, then annually once stable.",
+    "hospitalization_required": false
+  },
+  "gastroenteritis": {
+    "severity": "low",
+    "specialist": "General Practitioner / Gastroenterologist",
+    "recommended_tests": [
+      "Clinical diagnosis in most cases",
+      "Stool microscopy, culture, and sensitivity if symptoms persist",
+      "Stool PCR panel for pathogen detection",
+      "Electrolytes and renal function to assess dehydration"
+    ],
+    "possible_medications": [
+      "Oral Rehydration Solution (ORS) as the cornerstone of treatment",
+      "Antiemetics (e.g. ondansetron) for persistent vomiting",
+      "Antibiotics only if a bacterial cause is confirmed",
+      "Zinc supplements, especially recommended for children"
+    ],
+    "home_care": [
+      "Drink ORS or clear fluids frequently in small sips",
+      "Resume eating bland, easily digestible foods as tolerated",
+      "Practice strict hand hygiene",
+      "Avoid dairy and fatty foods until fully recovered"
+    ],
+    "warning_signs": [
+      "Inability to keep any fluids down",
+      "Blood in stool or vomit",
+      "Signs of severe dehydration (dizziness, reduced urination)",
+      "Symptoms lasting longer than 7 days"
+    ],
+    "follow_up": "See a doctor if unable to tolerate fluids or if symptoms do not improve within 3-5 days.",
+    "hospitalization_required": false
+  },
+  "acid reflux": {
+    "severity": "low",
+    "specialist": "Gastroenterologist",
+    "recommended_tests": [
+      "Clinical diagnosis for typical symptoms",
+      "Upper GI Endoscopy if alarm symptoms are present",
+      "24-hour ambulatory pH monitoring",
+      "H. pylori testing (breath test or stool antigen)"
+    ],
+    "possible_medications": [
+      "Proton Pump Inhibitors (e.g. omeprazole, esomeprazole)",
+      "H2 receptor antagonists (e.g. famotidine)",
+      "Antacids (e.g. Gaviscon) for rapid symptomatic relief",
+      "Prokinetics (e.g. domperidone) if delayed gastric emptying contributes"
+    ],
+    "home_care": [
+      "Elevate the head of the bed by 15-20 cm",
+      "Eat smaller, more frequent meals",
+      "Avoid eating within 3 hours of bedtime",
+      "Avoid trigger foods such as fatty, spicy, or caffeinated items",
+      "Maintain a healthy weight"
+    ],
+    "warning_signs": [
+      "Difficulty or pain when swallowing",
+      "Unintentional weight loss",
+      "Vomiting blood or black, tarry stools",
+      "Symptoms not improving with medication after several weeks"
+    ],
+    "follow_up": "See a gastroenterologist if symptoms persist despite 4-8 weeks of treatment.",
+    "hospitalization_required": false
+  },
+  "migraine": {
+    "severity": "moderate",
+    "specialist": "Neurologist",
+    "recommended_tests": [
+      "Clinical diagnosis based on headache history",
+      "MRI brain with contrast if atypical features are present",
+      "CT brain if sudden severe headache to exclude haemorrhage",
+      "Headache diary for trigger identification"
+    ],
+    "possible_medications": [
+      "Triptans (e.g. sumatriptan, rizatriptan) for acute attacks",
+      "NSAIDs (e.g. ibuprofen, naproxen) for mild-moderate attacks",
+      "Antiemetics (e.g. metoclopramide) for associated nausea",
+      "Preventive options (e.g. propranolol, topiramate, amitriptyline) if attacks are frequent"
+    ],
+    "home_care": [
+      "Keep a headache diary to identify and avoid personal triggers",
+      "Maintain regular sleep, meal, and exercise schedules",
+      "Rest in a dark, quiet room at the onset of an attack",
+      "Apply cold packs to the forehead or neck",
+      "Stay well hydrated"
+    ],
+    "warning_signs": [
+      "Sudden 'thunderclap' headache unlike previous episodes",
+      "Headache with fever and neck stiffness",
+      "New weakness, numbness, or vision loss",
+      "Headache following a head injury"
+    ],
+    "follow_up": "See a neurologist if attacks occur more than 4 times per month or change in character.",
+    "hospitalization_required": false
+  },
+  "depression": {
+    "severity": "moderate",
+    "specialist": "Psychiatrist / Psychologist / General Practitioner",
+    "recommended_tests": [
+      "PHQ-9 screening questionnaire",
+      "Thyroid function tests to exclude hypothyroidism",
+      "Full Blood Count to exclude anaemia",
+      "Vitamin B12, folate, and Vitamin D levels"
+    ],
+    "possible_medications": [
+      "SSRIs (e.g. fluoxetine, sertraline, escitalopram) as first-line antidepressants",
+      "SNRIs (e.g. venlafaxine, duloxetine) particularly if pain or anxiety co-exists",
+      "Mirtazapine if poor appetite or insomnia is prominent"
+    ],
+    "home_care": [
+      "Engage in regular aerobic exercise",
+      "Maintain social connections with trusted friends or family",
+      "Establish a consistent daily routine with regular sleep and meals",
+      "Access talking therapies such as CBT",
+      "Limit alcohol intake"
+    ],
+    "warning_signs": [
+      "Thoughts of self-harm or suicide",
+      "Inability to carry out daily activities",
+      "Complete loss of interest in previously enjoyed activities",
+      "Significant changes in appetite or sleep lasting more than 2 weeks"
+    ],
+    "follow_up": "Regular follow-up every 2-4 weeks initially, then monthly once stable on treatment. Seek immediate help for any thoughts of self-harm.",
+    "hospitalization_required": false
+  },
+  "anxiety disorder": {
+    "severity": "moderate",
+    "specialist": "Psychiatrist / Psychologist / General Practitioner",
+    "recommended_tests": [
+      "GAD-7 screening questionnaire",
+      "Thyroid function tests to exclude hyperthyroidism",
+      "Cardiac assessment (ECG) if palpitations are prominent",
+      "Blood glucose to exclude hypoglycaemia mimicking panic attacks"
+    ],
+    "possible_medications": [
+      "SSRIs (e.g. sertraline, escitalopram) as first-line treatment",
+      "SNRIs (e.g. venlafaxine) as an effective alternative",
+      "Buspirone as a non-sedating anxiolytic option",
+      "Beta-blockers (e.g. propranolol) for situational anxiety symptoms"
+    ],
+    "home_care": [
+      "Practice diaphragmatic breathing and progressive muscle relaxation",
+      "Engage in regular aerobic exercise",
+      "Limit caffeine, alcohol, and recreational drug use",
+      "Practice mindfulness meditation",
+      "Gradually face feared situations rather than avoiding them"
+    ],
+    "warning_signs": [
+      "Panic attacks with chest pain that could mimic a heart attack",
+      "Inability to leave the house or carry out daily tasks",
+      "Thoughts of self-harm",
+      "Severe physical symptoms such as fainting"
+    ],
+    "follow_up": "Review with a doctor or therapist every 2-4 weeks initially to assess treatment response.",
+    "hospitalization_required": false
+  },
+  "urinary tract infection": {
+    "severity": "low",
+    "specialist": "General Practitioner / Urologist",
+    "recommended_tests": [
+      "Urine dipstick test",
+      "Midstream Urine (MSU) culture and sensitivity",
+      "FBC and CRP if upper UTI is suspected",
+      "Renal ultrasound for recurrent infections"
+    ],
+    "possible_medications": [
+      "Trimethoprim or nitrofurantoin as first-line for uncomplicated lower UTI",
+      "Pivmecillinam as an alternative first-line option",
+      "Co-amoxiclav or cefalexin as second-line or in pregnancy",
+      "Urinary analgesics (e.g. phenazopyridine) for symptom relief"
+    ],
+    "home_care": [
+      "Drink plenty of fluids to flush bacteria from the urinary tract",
+      "Urinate promptly when the urge arises",
+      "Wipe front to back after using the toilet",
+      "Urinate after sexual intercourse",
+      "Avoid perfumed soaps or products around the genital area"
+    ],
+    "warning_signs": [
+      "Fever with chills or back pain (possible kidney infection)",
+      "Blood in the urine",
+      "Symptoms not improving after 48 hours of antibiotics",
+      "Nausea and vomiting accompanying urinary symptoms"
+    ],
+    "follow_up": "See a doctor if symptoms do not improve within 2-3 days of starting antibiotics.",
+    "hospitalization_required": false
+  },
+  "rheumatoid arthritis": {
+    "severity": "moderate",
+    "specialist": "Rheumatologist",
+    "recommended_tests": [
+      "Rheumatoid Factor (RF)",
+      "Anti-CCP antibodies",
+      "ESR and CRP",
+      "X-rays of hands and feet",
+      "MRI or ultrasound of affected joints"
+    ],
+    "possible_medications": [
+      "Methotrexate as the anchor disease-modifying drug",
+      "Hydroxychloroquine and sulfasalazine, often combined with methotrexate",
+      "Biologic DMARDs (e.g. etanercept, adalimumab) for refractory disease",
+      "NSAIDs (e.g. naproxen) for symptomatic relief",
+      "Short-term corticosteroids during flares"
+    ],
+    "home_care": [
+      "Balance rest during flares with gentle exercise during remission",
+      "Apply heat for stiffness and cold packs for swollen joints",
+      "Use assistive devices to protect joints",
+      "Maintain a healthy weight to reduce joint stress",
+      "Quit smoking"
+    ],
+    "warning_signs": [
+      "Sudden severe joint swelling with fever",
+      "New chest pain or breathlessness",
+      "Numbness or weakness in hands or feet",
+      "Signs of infection at a joint (warmth, redness, fever)"
+    ],
+    "follow_up": "Regular rheumatology review every 3-6 months to monitor disease activity and medication safety.",
+    "hospitalization_required": false
+  },
+  "tuberculosis": {
+    "severity": "high",
+    "specialist": "Pulmonologist / Infectious Disease Specialist",
+    "recommended_tests": [
+      "Sputum smear microscopy (AFB stain)",
+      "Sputum culture",
+      "GeneXpert MTB/RIF PCR",
+      "Chest X-ray",
+      "HIV test"
+    ],
+    "possible_medications": [
+      "Standard first-line regimen: Isoniazid, Rifampicin, Pyrazinamide, Ethambutol for 2 months, then Isoniazid and Rifampicin for 4 months",
+      "Pyridoxine (Vitamin B6) co-prescribed with isoniazid to prevent neuropathy"
+    ],
+    "home_care": [
+      "Adhere strictly to the full treatment course, typically 6 months",
+      "Cover mouth and nose when coughing or sneezing",
+      "Ensure good ventilation in living spaces",
+      "Eat a nutritious, high-calorie diet to support recovery",
+      "Avoid alcohol during treatment"
+    ],
+    "warning_signs": [
+      "Coughing up blood",
+      "Severe difficulty breathing",
+      "High fever not responding to treatment",
+      "Signs of liver toxicity such as yellowing of the skin or eyes"
+    ],
+    "follow_up": "Attend monthly sputum monitoring and complete the full prescribed treatment course without interruption.",
+    "hospitalization_required": false
+  },
+  "malaria": {
+    "severity": "high",
+    "specialist": "Infectious Disease Specialist / Tropical Medicine",
+    "recommended_tests": [
+      "Thick and thin blood film microscopy",
+      "Rapid Diagnostic Test (RDT)",
+      "Complete Blood Count",
+      "Blood glucose",
+      "Renal and liver function tests"
+    ],
+    "possible_medications": [
+      "Artemisinin-based Combination Therapy (e.g. artemether-lumefantrine) for uncomplicated malaria",
+      "IV Artesunate for severe or complicated malaria",
+      "Chloroquine for chloroquine-sensitive species",
+      "Primaquine for radical cure after checking G6PD status"
+    ],
+    "home_care": [
+      "Use insecticide-treated bed nets every night",
+      "Apply insect repellent on exposed skin at dusk and dawn",
+      "Eliminate stagnant water around the home",
+      "Complete the full antimalarial treatment course even if symptoms resolve early"
+    ],
+    "warning_signs": [
+      "Confusion or reduced consciousness",
+      "Difficulty breathing",
+      "Persistent vomiting unable to keep medication down",
+      "Dark or reduced urine output"
+    ],
+    "follow_up": "Seek immediate medical care for any high fever within 3 months of travel to a malaria-endemic area.",
+    "hospitalization_required": true
+  },
+  "appendicitis": {
+    "severity": "critical",
+    "specialist": "General Surgeon / Emergency Medicine",
+    "recommended_tests": [
+      "Clinical examination for abdominal tenderness",
+      "Ultrasound abdomen",
+      "CT abdomen and pelvis with contrast",
+      "Full Blood Count"
+    ],
+    "possible_medications": [
+      "IV antibiotics (e.g. co-amoxiclav, metronidazole with cefuroxime) given pre- and post-operatively",
+      "IV analgesics (e.g. paracetamol, morphine) for pain relief",
+      "IV fluids for resuscitation and surgical preparation"
+    ],
+    "home_care": [
+      "Seek emergency care immediately if appendicitis is suspected",
+      "Do not take laxatives or apply heat to the abdomen",
+      "Do not eat or drink anything once appendicitis is suspected",
+      "Follow all post-operative wound care instructions"
+    ],
+    "warning_signs": [
+      "Sudden worsening of abdominal pain",
+      "Pain moving to the lower right abdomen",
+      "Fever with abdominal rigidity",
+      "Inability to pass gas or have a bowel movement"
+    ],
+    "follow_up": "This is a surgical emergency — seek immediate emergency department evaluation rather than routine follow-up.",
+    "hospitalization_required": true
+  },
+  "allergic reaction": {
+    "severity": "high",
+    "specialist": "Allergist / Immunologist / Emergency Medicine",
+    "recommended_tests": [
+      "Skin prick testing",
+      "Specific IgE blood tests (RAST / ImmunoCAP)",
+      "Serum tryptase if anaphylaxis is suspected",
+      "Oral food challenge for confirmed food allergy"
+    ],
+    "possible_medications": [
+      "Intramuscular adrenaline (epinephrine) as first-line treatment for anaphylaxis",
+      "Antihistamines (e.g. chlorphenamine, cetirizine) for mild-moderate reactions",
+      "Corticosteroids (e.g. hydrocortisone, prednisolone) to reduce risk of recurrence",
+      "Inhaled bronchodilators (e.g. salbutamol) for associated bronchospasm"
+    ],
+    "home_care": [
+      "Always carry two adrenaline auto-injectors if previously prescribed",
+      "Wear a medical alert bracelet identifying the allergy",
+      "Read food labels carefully and inform others of severe allergies",
+      "Avoid all known triggers and keep a written allergy action plan"
+    ],
+    "warning_signs": [
+      "Swelling of the throat, lips, or tongue",
+      "Difficulty breathing or wheezing",
+      "Dizziness, fainting, or rapid heartbeat",
+      "Widespread hives with breathing difficulty"
+    ],
+    "follow_up": "Seek emergency care immediately for any signs of throat swelling or breathing difficulty; otherwise review with an allergist for long-term management.",
+    "hospitalization_required": true
+  },
+  "heart attack": {
+    "severity": "critical",
+    "specialist": "Cardiologist / Emergency Medicine",
+    "recommended_tests": [
+      "12-lead Electrocardiogram (ECG/EKG)",
+      "Cardiac biomarkers (high-sensitivity Troponin I/T)",
+      "Echocardiogram",
+      "Coronary Angiography",
+      "Chest X-ray"
+    ],
+    "possible_medications": [
+      "Chewable aspirin (300 mg) immediately if heart attack is suspected",
+      "Antiplatelets (e.g. clopidogrel, ticagrelor)",
+      "Thrombolytics (e.g. alteplase) if primary angioplasty is not immediately available",
+      "Beta-blockers (e.g. metoprolol)",
+      "Nitrates (e.g. glyceryl trinitrate) for chest pain relief"
+    ],
+    "home_care": [
+      "Call emergency services immediately — do not attempt to drive yourself",
+      "Sit upright and try to remain calm while waiting for help",
+      "Chew an aspirin tablet if available and not allergic",
+      "After discharge, attend all cardiac rehabilitation sessions"
+    ],
+    "warning_signs": [
+      "Crushing chest pain or pressure lasting more than a few minutes",
+      "Pain radiating to the arm, jaw, neck, or back",
+      "Sudden shortness of breath",
+      "Cold sweat, nausea, or lightheadedness"
+    ],
+    "follow_up": "This is a medical emergency — call emergency services immediately rather than waiting for a scheduled appointment.",
+    "hospitalization_required": true
+  },
+  "angina": {
+    "severity": "high",
+    "specialist": "Cardiologist",
+    "recommended_tests": [
+      "12-lead Electrocardiogram (ECG/EKG)",
+      "Exercise stress test",
+      "Coronary Angiography",
+      "Echocardiogram",
+      "Lipid panel and blood glucose"
+    ],
+    "possible_medications": [
+      "Sublingual glyceryl trinitrate (GTN) spray or tablets for acute episodes",
+      "Beta-blockers (e.g. bisoprolol, atenolol) for prevention",
+      "Calcium channel blockers (e.g. amlodipine, diltiazem)",
+      "Antiplatelets (e.g. aspirin)",
+      "Statins (e.g. atorvastatin)"
+    ],
+    "home_care": [
+      "Stop activity and rest immediately when chest pain begins",
+      "Use prescribed GTN spray as directed at the onset of symptoms",
+      "Avoid heavy meals, extreme cold, and sudden exertion",
+      "Stop smoking and manage blood pressure and cholesterol"
+    ],
+    "warning_signs": [
+      "Chest pain lasting longer than 15 minutes or not relieved by rest/GTN",
+      "Chest pain at rest with no clear trigger",
+      "Pain accompanied by sweating, nausea, or breathlessness",
+      "New or worsening pattern of chest pain"
+    ],
+    "follow_up": "Seek emergency care immediately if pain is not relieved by rest and GTN within a few minutes, as this may indicate a heart attack.",
+    "hospitalization_required": true
+  },
+  "diabetic ketoacidosis": {
+    "severity": "critical",
+    "specialist": "Endocrinologist / Emergency Medicine",
+    "recommended_tests": [
+      "Blood glucose",
+      "Blood ketones (beta-hydroxybutyrate) or urine ketones",
+      "Arterial or venous blood gas (assess acidosis)",
+      "Electrolytes (especially potassium)",
+      "Renal function tests"
+    ],
+    "possible_medications": [
+      "Intravenous fluid resuscitation (0.9% saline) as first-line treatment",
+      "Intravenous insulin infusion to lower blood glucose and clear ketones",
+      "Potassium replacement once levels and urine output are confirmed adequate",
+      "Treatment of any underlying trigger such as infection"
+    ],
+    "home_care": [
+      "This condition requires emergency hospital treatment and cannot be managed at home",
+      "Check blood ketones if blood glucose is very high or unwell with Type 1 diabetes",
+      "Never stop insulin during illness — follow sick-day dose-adjustment rules",
+      "After recovery, review insulin regimen and sick-day management with the diabetes team"
+    ],
+    "warning_signs": [
+      "Persistent vomiting and inability to keep fluids down",
+      "Deep, rapid breathing",
+      "Fruity-smelling breath",
+      "Confusion, drowsiness, or loss of consciousness"
+    ],
+    "follow_up": "Seek emergency hospital care immediately — diabetic ketoacidosis is a medical emergency requiring inpatient treatment.",
+    "hospitalization_required": true
+  },
+  "seasonal allergies (hay fever)": {
+    "severity": "low",
+    "specialist": "Allergist / General Practitioner",
+    "recommended_tests": [
+      "Clinical diagnosis based on symptom pattern and seasonal timing",
+      "Skin prick testing for specific pollen allergens",
+      "Specific IgE blood testing (RAST) if skin testing is not suitable"
+    ],
+    "possible_medications": [
+      "Oral antihistamines (e.g. cetirizine, loratadine, fexofenadine)",
+      "Intranasal corticosteroid sprays (e.g. fluticasone, mometasone)",
+      "Antihistamine eye drops for itchy, watery eyes",
+      "Leukotriene receptor antagonists (e.g. montelukast) for persistent symptoms",
+      "Allergen immunotherapy for severe or poorly controlled cases"
+    ],
+    "home_care": [
+      "Monitor local pollen forecasts and stay indoors when counts are high",
+      "Keep windows closed during peak pollen season",
+      "Shower and change clothes after being outdoors",
+      "Use wraparound sunglasses to reduce pollen contact with eyes",
+      "Use a saline nasal rinse to clear allergens from the nasal passages"
+    ],
+    "warning_signs": [
+      "Wheezing or difficulty breathing",
+      "Symptoms not responding to standard antihistamines",
+      "Swelling of the face, lips, or throat",
+      "Significant impact on sleep or daily functioning"
+    ],
+    "follow_up": "See an allergist if symptoms are poorly controlled with standard antihistamines or significantly affect quality of life.",
+    "hospitalization_required": false
+  },
+  "chronic obstructive pulmonary disease (copd)": {
+    "severity": "high",
+    "specialist": "Pulmonologist",
+    "recommended_tests": [
+      "Spirometry (post-bronchodilator FEV1/FVC ratio < 0.7 confirms diagnosis)",
+      "Chest X-ray",
+      "Pulse oximetry / Arterial Blood Gas",
+      "CT chest for suspected emphysema or complications",
+      "Alpha-1 antitrypsin level in early-onset or non-smoking cases"
+    ],
+    "possible_medications": [
+      "Short-acting bronchodilators (e.g. salbutamol, ipratropium) for symptom relief",
+      "Long-acting bronchodilators (e.g. tiotropium, formoterol) for maintenance therapy",
+      "Inhaled corticosteroids combined with long-acting bronchodilators for frequent exacerbations",
+      "Oral corticosteroids and antibiotics during acute exacerbations",
+      "Long-term home oxygen therapy in advanced disease with low blood oxygen"
+    ],
+    "home_care": [
+      "Stop smoking completely — the single most effective measure to slow progression",
+      "Attend pulmonary rehabilitation for exercise training and breathing techniques",
+      "Get annual influenza and pneumococcal vaccinations",
+      "Use inhalers correctly — ask a nurse or pharmacist to check technique regularly",
+      "Avoid air pollution, dust, and fumes where possible"
+    ],
+    "warning_signs": [
+      "Increased breathlessness beyond usual baseline",
+      "Change in sputum colour, volume, or thickness with fever",
+      "Blue lips or fingertips",
+      "Confusion, drowsiness, or worsening swelling in the legs"
+    ],
+    "follow_up": "Regular pulmonology review every 3-12 months depending on severity, with urgent review for any exacerbation.",
+    "hospitalization_required": true
+  },
+  "iron deficiency anemia": {
+    "severity": "moderate",
+    "specialist": "Haematologist / General Practitioner",
+    "recommended_tests": [
+      "Full Blood Count (low haemoglobin, low MCV)",
+      "Serum ferritin (low in iron deficiency)",
+      "Serum iron and total iron-binding capacity",
+      "Stool occult blood test to investigate for gastrointestinal blood loss",
+      "Upper and/or lower GI endoscopy if unexplained blood loss is suspected"
+    ],
+    "possible_medications": [
+      "Oral iron supplements (e.g. ferrous sulfate, ferrous fumarate)",
+      "Vitamin C alongside iron to improve absorption",
+      "Intravenous iron infusion for severe deficiency or intolerance to oral iron",
+      "Blood transfusion in cases of severe symptomatic anaemia"
+    ],
+    "home_care": [
+      "Eat iron-rich foods such as red meat, leafy greens, and legumes",
+      "Take iron supplements with vitamin C-rich foods to improve absorption",
+      "Avoid tea, coffee, and calcium supplements close to iron dosing as they reduce absorption",
+      "Take iron supplements as prescribed even after symptoms improve, to replenish stores"
+    ],
+    "warning_signs": [
+      "Chest pain or palpitations",
+      "Severe fatigue or fainting",
+      "Visible blood in stool or vomit",
+      "Rapid worsening of paleness or breathlessness"
+    ],
+    "follow_up": "Recheck Full Blood Count after 4-6 weeks of treatment to confirm response, and investigate any underlying cause of blood loss.",
+    "hospitalization_required": false
+  }
+}

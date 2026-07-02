@@ -1,0 +1,275 @@
+symptoms,disease
+fever cough sore throat runny nose sneezing,Common Cold
+runny nose sneezing sore throat mild fever congestion,Common Cold
+congestion sore throat cough fatigue mild headache,Common Cold
+sneezing runny nose watery eyes mild cough,Common Cold
+sore throat cough low fever nasal congestion,Common Cold
+mild fever fatigue body ache runny nose,Common Cold
+nasal congestion sneezing itchy throat cough,Common Cold
+fever cough body ache chills fatigue headache,Influenza
+high fever severe body ache chills sweating fatigue,Influenza
+muscle pain headache fever cough sore throat chills,Influenza
+sudden fever severe headache fatigue muscle ache,Influenza
+body ache high fever dry cough fatigue weakness,Influenza
+chills sweating high fever muscle pain loss of appetite,Influenza
+severe fatigue headache fever cough runny nose body ache,Influenza
+fever cough shortness of breath chest tightness wheezing,Pneumonia
+high fever productive cough chest pain difficulty breathing,Pneumonia
+chills fever cough rust colored sputum chest pain,Pneumonia
+rapid breathing chest pain fever cough fatigue,Pneumonia
+difficulty breathing fever persistent cough sweating chills,Pneumonia
+low oxygen cough fever chest tightness fatigue,Pneumonia
+chest pain shortness of breath sweating nausea left arm pain,Heart Disease
+crushing chest pain radiating to arm jaw pain sweating nausea,Heart Disease
+shortness of breath chest tightness palpitations dizziness,Heart Disease
+fatigue shortness of breath swollen ankles chest pain,Heart Disease
+irregular heartbeat dizziness chest discomfort shortness of breath,Heart Disease
+pressure in chest sweating nausea shortness of breath,Heart Disease
+chest pain palpitations fainting dizziness shortness of breath,Heart Disease
+headache nausea blurred vision light sensitivity vomiting,Migraine
+throbbing headache one side nausea vomiting light sensitivity,Migraine
+severe headache aura visual disturbances nausea sensitivity to light,Migraine
+pulsating headache noise sensitivity nausea dizziness,Migraine
+headache fatigue nausea vomiting neck stiffness,Migraine
+one sided headache blurred vision nausea vomiting,Migraine
+frequent urination excessive thirst increased hunger fatigue blurred vision,Diabetes
+blurred vision slow wound healing fatigue increased thirst frequent urination,Diabetes
+numbness in feet frequent urination weight loss excessive thirst,Diabetes
+excessive hunger fatigue frequent urination dark urine,Diabetes
+increased thirst unexplained weight loss frequent urination blurred vision,Diabetes
+fatigue frequent urination skin infections slow healing,Diabetes
+tingling hands feet frequent urination increased thirst fatigue,Diabetes
+joint pain swelling stiffness morning stiffness fatigue,Rheumatoid Arthritis
+swollen joints stiffness fatigue loss of appetite low fever,Rheumatoid Arthritis
+symmetrical joint swelling pain warmth fatigue,Rheumatoid Arthritis
+joint pain redness swelling morning stiffness weakness,Rheumatoid Arthritis
+multiple joint pain stiffness fatigue loss of appetite,Rheumatoid Arthritis
+joint inflammation pain stiffness fatigue anemia,Rheumatoid Arthritis
+high blood pressure headache dizziness blurred vision,Hypertension
+severe headache dizziness blurred vision chest pain hypertension,Hypertension
+headache nosebleed dizziness shortness of breath,Hypertension
+blurred vision headache chest pain fatigue dizziness,Hypertension
+pounding headache dizziness vision changes nausea,Hypertension
+headache ringing in ears dizziness fatigue,Hypertension
+abdominal pain nausea vomiting diarrhea fever loss of appetite,Gastroenteritis
+diarrhea vomiting stomach cramps nausea mild fever,Gastroenteritis
+nausea vomiting watery diarrhea stomach pain dehydration,Gastroenteritis
+stomach cramps diarrhea vomiting fever weakness,Gastroenteritis
+loose stools nausea abdominal cramping vomiting fatigue,Gastroenteritis
+vomiting diarrhea abdominal pain low fever muscle aches,Gastroenteritis
+persistent cough wheezing shortness of breath chest tightness,Asthma
+wheezing breathlessness coughing chest tightness especially at night,Asthma
+difficulty breathing wheezing cough triggered by exercise cold air,Asthma
+cough shortness of breath wheezing chest tightness fatigue,Asthma
+nocturnal cough wheezing breathlessness,Asthma
+shortness of breath cough whistling sound breathing tightness,Asthma
+burning sensation chest heartburn acid taste regurgitation,Acid Reflux
+heartburn chest burning sour taste regurgitation bloating,Acid Reflux
+acid regurgitation burning throat chest pain after eating,Acid Reflux
+regurgitation burping bloating chest discomfort sour taste,Acid Reflux
+heartburn difficulty swallowing chest pain regurgitation,Acid Reflux
+burning in chest after eating sour taste nausea bloating,Acid Reflux
+dysuria frequency urgency lower abdominal pain cloudy urine,Urinary Tract Infection
+burning urination frequent urination lower back pain fever,Urinary Tract Infection
+painful urination cloudy urine pelvic pain frequent urination,Urinary Tract Infection
+urgency to urinate burning sensation foul smelling urine pelvic discomfort,Urinary Tract Infection
+lower abdominal pain frequent urination blood in urine burning,Urinary Tract Infection
+frequent urination burning pelvic pressure fever chills,Urinary Tract Infection
+itchy rash red patches dry scaly skin inflammation,Eczema
+dry itchy skin red inflamed patches weeping oozing,Eczema
+skin redness itching dry patches scaling thickening,Eczema
+itching rash oozing crusting inflamed skin,Eczema
+dry skin redness itching lichenification sleep disturbance,Eczema
+inflamed skin itching redness scaly patches,Eczema
+excessive sadness hopelessness fatigue loss of interest sleep disturbance,Depression
+persistent sadness loss of interest fatigue difficulty concentrating worthlessness,Depression
+low energy insomnia loss of appetite weight loss hopelessness,Depression
+anhedonia fatigue sleep problems poor concentration irritability,Depression
+crying spells fatigue social withdrawal poor concentration,Depression
+feelings of guilt worthlessness fatigue insomnia poor appetite,Depression
+excessive worry nervousness restlessness muscle tension sleep problems,Anxiety Disorder
+palpitations sweating trembling shortness of breath panic,Anxiety Disorder
+racing heart worry restlessness difficulty concentrating fatigue,Anxiety Disorder
+nervousness irritability muscle tension headache sleep disturbance,Anxiety Disorder
+fear avoidance behavior panic attacks sweating trembling,Anxiety Disorder
+chest tightness shortness of breath excessive fear worry insomnia,Anxiety Disorder
+jaundice dark urine fatigue abdominal pain nausea loss of appetite,Hepatitis
+yellowing skin eyes fatigue nausea vomiting right upper abdominal pain,Hepatitis
+fever jaundice dark urine pale stools fatigue,Hepatitis
+loss of appetite nausea vomiting jaundice abdominal discomfort,Hepatitis
+fatigue nausea right abdominal pain jaundice joint pain,Hepatitis
+abdominal swelling jaundice fatigue dark urine itching,Hepatitis
+itchy scalp dandruff dry flaky patches redness,Psoriasis
+red scaly plaques itching dry cracked skin,Psoriasis
+thick silvery scales red patches itching burning,Psoriasis
+dry skin red patches silver scales joint pain,Psoriasis
+plaques on elbows knees scalp itching inflammation,Psoriasis
+skin lesions itching redness scaling nail changes,Psoriasis
+high fever stiff neck severe headache photophobia vomiting,Meningitis
+sudden severe headache neck stiffness fever sensitivity to light,Meningitis
+neck stiffness high fever rash photophobia altered consciousness,Meningitis
+severe headache vomiting stiff neck high fever confusion,Meningitis
+photophobia phonophobia stiff neck fever headache nausea,Meningitis
+sudden fever headache confusion neck stiffness vomiting,Meningitis
+tremor slow movement muscle stiffness balance problems rigidity,Parkinson Disease
+resting tremor muscle rigidity slow movement shuffling gait,Parkinson Disease
+stooped posture slow movement tremor balance difficulty,Parkinson Disease
+rigidity tremor bradykinesia freezing of gait,Parkinson Disease
+small handwriting tremor muscle stiffness slow movement,Parkinson Disease
+loss of automatic movements slow movement stiffness tremor,Parkinson Disease
+memory loss confusion disorientation behavioral changes,Alzheimer Disease
+forgetfulness difficulty learning new things confusion mood changes,Alzheimer Disease
+memory impairment language problems disorientation personality changes,Alzheimer Disease
+confusion getting lost disorientation memory problems,Alzheimer Disease
+difficulty with daily tasks confusion memory loss mood swings,Alzheimer Disease
+repeating questions confusion poor judgment memory loss,Alzheimer Disease
+painful swallowing white patches on throat fever swollen tonsils,Tonsillitis
+swollen tonsils sore throat difficulty swallowing fever bad breath,Tonsillitis
+red enlarged tonsils white spots fever sore throat,Tonsillitis
+sore throat difficulty swallowing fever chills swollen lymph nodes,Tonsillitis
+throat pain fever swollen tonsils drooling difficulty swallowing,Tonsillitis
+high fever sore throat swollen tonsils loss of appetite,Tonsillitis
+ear pain hearing loss discharge from ear fever,Ear Infection
+pain in ear pulling ear fever hearing difficulty,Ear Infection
+ear discharge pain fever difficulty hearing headache,Ear Infection
+severe ear pain fever nausea vomiting dizziness,Ear Infection
+fluid in ear ear pain hearing loss fever irritability,Ear Infection
+throbbing ear pain reduced hearing fever,Ear Infection
+blood in stool abdominal pain weight loss fatigue,Colorectal Cancer
+change in bowel habits rectal bleeding abdominal pain weight loss,Colorectal Cancer
+unexplained weight loss fatigue blood in stool pencil thin stool,Colorectal Cancer
+rectal bleeding abdominal cramps feeling bowel not empty fatigue,Colorectal Cancer
+persistent diarrhea constipation blood in stool abdominal pain,Colorectal Cancer
+fatigue pallor blood in stool bowel change,Colorectal Cancer
+lump in breast nipple discharge skin dimpling breast pain,Breast Cancer
+breast lump swollen lymph nodes nipple retraction skin changes,Breast Cancer
+breast pain lump thickening redness nipple inversion,Breast Cancer
+change in breast shape lump armpit lymph node swelling,Breast Cancer
+skin dimpling breast swelling lump nipple discharge blood,Breast Cancer
+lump underarm breast asymmetry skin puckering,Breast Cancer
+dark tarry stool nausea abdominal pain vomiting blood,Peptic Ulcer
+burning stomach pain at night nausea bloating weight loss,Peptic Ulcer
+gnawing stomach pain belching bloating dark stool,Peptic Ulcer
+abdominal pain after eating nausea vomiting blood in stool,Peptic Ulcer
+stomach pain relief after eating antacids belching bloating,Peptic Ulcer
+upper abdominal burning pain nausea loss of appetite dark stool,Peptic Ulcer
+redness burning itching discharge unusual odor vaginal irritation,Vaginal Infection
+itching burning vaginal discharge fishy odor irritation,Vaginal Infection
+white clumpy discharge itching burning soreness,Vaginal Infection
+yellow green discharge burning odor vaginal inflammation,Vaginal Infection
+pelvic pain discharge itching redness burning urination,Vaginal Infection
+abnormal discharge odor vaginal itching burning discomfort,Vaginal Infection
+sudden weakness one side face drooping slurred speech,Stroke
+sudden numbness weakness face arm leg confusion speech,Stroke
+severe headache vision loss weakness one side dizziness,Stroke
+loss of balance coordination sudden confusion vision problems,Stroke
+trouble speaking arm weakness face drooping sudden headache,Stroke
+sudden dizziness falls vision blurring slurred speech weakness,Stroke
+fever sore throat fatigue swollen lymph nodes rash,Typhoid Fever
+prolonged fever headache abdominal pain constipation rose spots,Typhoid Fever
+high fever abdominal pain diarrhea headache weakness,Typhoid Fever
+stepwise fever constipation headache abdominal discomfort,Typhoid Fever
+fever loss of appetite abdominal pain weakness rose colored rash,Typhoid Fever
+sustained fever abdominal tenderness constipation headache,Typhoid Fever
+fever chills sweating cyclical malaise headache,Malaria
+cyclical high fever chills sweating headache muscle aches,Malaria
+fever chills sweating rigors anemia fatigue,Malaria
+periodic fever nausea headache fatigue sweating,Malaria
+fever chills muscle pain headache nausea vomiting sweating,Malaria
+shaking chills high fever sweating fatigue anemia,Malaria
+skin itching redness welts hives swelling allergic reaction,Allergic Reaction
+hives swelling itching difficulty breathing wheezing,Allergic Reaction
+rash itching redness swelling sneezing runny nose,Allergic Reaction
+anaphylaxis swelling throat difficulty breathing low blood pressure,Allergic Reaction
+itching watery eyes sneezing rash skin redness,Allergic Reaction
+swollen lips throat tightness itching rash hives,Allergic Reaction
+lower back pain radiating to leg numbness tingling weakness,Sciatica
+sharp shooting pain from lower back to foot leg weakness,Sciatica
+leg pain numbness tingling burning lower back pain,Sciatica
+buttock pain radiating down leg sitting worsens pain,Sciatica
+one sided leg pain numbness lower back stiffness,Sciatica
+radiating hip pain weakness numbness in leg lower back pain,Sciatica
+productive cough blood in sputum night sweats weight loss fever,Tuberculosis
+persistent cough weeks fever night sweats weight loss fatigue,Tuberculosis
+cough with blood night sweats weight loss chest pain fever,Tuberculosis
+prolonged cough fever fatigue weight loss loss of appetite,Tuberculosis
+fever cough chest pain hemoptysis weight loss night sweats,Tuberculosis
+night sweats weight loss chronic cough fatigue lymph node swelling,Tuberculosis
+severe abdominal pain nausea vomiting fever right lower quadrant,Appendicitis
+right lower abdominal pain fever nausea vomiting rebound tenderness,Appendicitis
+pain around navel migrating right lower abdomen nausea fever,Appendicitis
+abdominal pain worse movement fever vomiting loss of appetite,Appendicitis
+sudden right lower pain fever nausea rigidity abdomen,Appendicitis
+right iliac fossa pain vomiting low grade fever tenderness,Appendicitis
+red itchy rash blistering burning skin pain,Chickenpox
+itchy fluid filled blisters fever tiredness loss of appetite,Chickenpox
+rash progressing to blisters crusts fever headache fatigue,Chickenpox
+widespread itchy blisters low fever loss of appetite,Chickenpox
+fluid filled vesicles itching rash fever malaise,Chickenpox
+blisters all over body itching fever headache fatigue,Chickenpox
+painful blistering rash one side body burning nerve pain,Shingles
+burning rash one side sensitivity to touch blisters fever,Shingles
+nerve pain tingling rash blisters one side chest back,Shingles
+painful rash blistering on trunk fever chills headache,Shingles
+postherpetic pain rash blisters localised one dermatome,Shingles
+itching burning blistering rash fever fatigue one side body,Shingles
+pain during intercourse abnormal bleeding pelvic pain discharge,Cervical Cancer
+abnormal vaginal bleeding between periods pelvic pain discharge,Cervical Cancer
+post coital bleeding pelvic pain foul discharge leg swelling,Cervical Cancer
+irregular bleeding watery bloody discharge back pain fatigue,Cervical Cancer
+heavy periods spotting between periods pelvic discomfort,Cervical Cancer
+abnormal discharge bleeding after menopause pelvic pain,Cervical Cancer
+frequent urination urgency poor stream intermittent flow,Enlarged Prostate
+difficulty starting urination weak stream dribbling after urination,Enlarged Prostate
+incomplete bladder emptying frequency nocturia urgency,Enlarged Prostate
+straining to urinate weak urine flow frequent urination night,Enlarged Prostate
+nocturia urinary retention hesitancy weak stream,Enlarged Prostate
+slow urine stream frequent urge incomplete emptying bladder,Enlarged Prostate
+sudden severe eye pain redness blurred vision halos,Glaucoma
+gradual vision loss peripheral vision loss eye pain,Glaucoma
+halos around lights blurred vision eye pain headache nausea,Glaucoma
+loss of peripheral vision blurred vision eye redness pain,Glaucoma
+increased eye pressure blurred vision halos pain,Glaucoma
+optic nerve damage peripheral vision loss eye pain redness,Glaucoma
+throat pain difficulty swallowing fever swollen lymph nodes,Strep Throat
+sudden sore throat difficulty swallowing fever swollen glands,Strep Throat
+red throat white patches fever swollen tonsils headache,Strep Throat
+painful swallowing high fever swollen neck glands red throat,Strep Throat
+sore throat fever chills swollen lymph nodes no cough,Strep Throat
+bright red throat fever headache stomachache,Strep Throat
+abdominal pain bloating gas diarrhea constipation cramping,Irritable Bowel Syndrome
+alternating diarrhea constipation bloating gas abdominal discomfort,Irritable Bowel Syndrome
+cramping bloating relief after defecation mucus in stool,Irritable Bowel Syndrome
+abdominal pain bloating diarrhea constipation nausea,Irritable Bowel Syndrome
+bowel urgency bloating cramping gas mucus loose stools,Irritable Bowel Syndrome
+cramping lower abdomen bloating altered bowel habit gas,Irritable Bowel Syndrome
+lump in neck persistent cough hoarseness difficulty swallowing,Thyroid Cancer
+neck swelling hoarse voice difficulty swallowing breathing,Thyroid Cancer
+painless lump neck enlarged lymph nodes voice changes,Thyroid Cancer
+thyroid swelling neck pain voice hoarseness difficulty swallowing,Thyroid Cancer
+persistent neck lump difficulty breathing swallowing hoarseness,Thyroid Cancer
+weight gain fatigue cold intolerance lump neck,Thyroid Cancer
+muscle weakness fatigue salt craving low blood pressure dizziness,Adrenal Insufficiency
+extreme fatigue weight loss low blood pressure salt craving,Adrenal Insufficiency
+nausea vomiting abdominal pain fatigue dizziness muscle weakness,Adrenal Insufficiency
+hyperpigmentation fatigue low blood pressure weight loss,Adrenal Insufficiency
+weakness nausea low sodium dizziness fatigue hyperpigmentation,Adrenal Insufficiency
+abdominal pain weakness extreme fatigue low blood pressure,Adrenal Insufficiency
+weight gain fatigue cold intolerance dry skin constipation depression,Hypothyroidism
+fatigue weight gain cold hands feet constipation hair loss,Hypothyroidism
+dry skin hair thinning fatigue cold intolerance weight gain,Hypothyroidism
+slowed heart rate depression fatigue weight gain constipation,Hypothyroidism
+puffy face weight gain tiredness constipation cold sensitivity,Hypothyroidism
+memory problems fatigue weight gain cold intolerance dry skin,Hypothyroidism
+weight loss rapid heartbeat sweating heat intolerance anxiety,Hyperthyroidism
+rapid heartbeat weight loss sweating nervousness tremor,Hyperthyroidism
+heat intolerance sweating weight loss palpitations anxiety,Hyperthyroidism
+goiter rapid heart rate tremor anxiety weight loss sweating,Hyperthyroidism
+increased appetite weight loss fatigue rapid pulse heat sensitivity,Hyperthyroidism
+irritability palpitations sweating insomnia weight loss tremor,Hyperthyroidism
+severe abdominal cramps blood in stool diarrhea weight loss fatigue,Crohn Disease
+chronic diarrhea abdominal pain weight loss fatigue fever,Crohn Disease
+bloody diarrhea cramping pain weight loss mouth sores,Crohn Disease
+abdominal pain diarrhea rectal bleeding fatigue weight loss,Crohn Disease
+cramping right lower abdominal pain chronic diarrhea weight loss,Crohn Disease
+fistula perianal pain diarrhea weight loss fever fatigue,Crohn Disease
