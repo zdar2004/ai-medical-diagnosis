@@ -1,0 +1,332 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding: 0 var(--space-6);
+  background-color: var(--color-surface);
+  border-bottom: var(--border-width) solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.menuButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+
+.menuButton:hover {
+  background-color: var(--color-primary-tint);
+  border-color: var(--color-primary);
+}
+
+.menuBar {
+  width: 18px;
+  height: 2px;
+  background-color: var(--color-ink);
+  border-radius: 1px;
+}
+
+/* Page title + breadcrumb block */
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.pageTitle {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--color-ink);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.breadcrumb {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--color-ink-muted);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.breadcrumbItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.breadcrumbCurrent {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.breadcrumbSeparator {
+  color: var(--color-border-strong);
+}
+
+/* Search area */
+
+.searchField {
+  position: relative;
+  flex: 1;
+  max-width: 360px;
+  min-width: 0;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  left: var(--space-3);
+  width: 16px;
+  height: 16px;
+  transform: translateY(-50%);
+  color: var(--color-ink-muted);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  padding: var(--space-2) var(--space-3) var(--space-2) calc(var(--space-3) * 2 + 16px);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: 999px;
+  background-color: var(--color-surface-sunken);
+  color: var(--color-ink);
+  transition: border-color var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.searchInput:focus {
+  border-color: var(--color-primary);
+  background-color: var(--color-surface);
+  box-shadow: 0 0 0 3px var(--color-primary-tint);
+}
+
+/* Right section */
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-shrink: 0;
+}
+
+.iconButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: 50%;
+  background-color: var(--color-surface);
+  color: var(--color-ink-muted);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.iconButton:hover {
+  background-color: var(--color-primary-tint);
+  color: var(--color-primary-dark);
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.notificationBadge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background-color: var(--color-signal);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  border: 1.5px solid var(--color-surface);
+}
+
+/* Profile block */
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-left: var(--space-4);
+  border-left: var(--border-width) solid var(--color-border);
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: 50%;
+  background-color: var(--color-primary-tint);
+  color: var(--color-primary-dark);
+}
+
+.avatarIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.profileText {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.profileName {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profileRole {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--color-ink-muted);
+  white-space: nowrap;
+}
+
+.profileToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background-color: transparent;
+  color: var(--color-ink-muted);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+
+.profileToggle:hover {
+  background-color: var(--color-surface-sunken);
+  color: var(--color-primary-dark);
+}
+
+.chevronIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.menuButton:focus-visible,
+.iconButton:focus-visible,
+.profileToggle:focus-visible,
+.searchInput:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+@media (min-width: 1025px) {
+  .menuButton {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .searchField {
+    max-width: 240px;
+  }
+}
+
+@media (max-width: 860px) {
+  .searchField {
+    display: none;
+  }
+
+  .profileText {
+    display: none;
+  }
+
+  .profile {
+    padding-left: var(--space-3);
+    gap: var(--space-2);
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar {
+    padding: 0 var(--space-3);
+    gap: var(--space-3);
+  }
+
+  .breadcrumb {
+    display: none;
+  }
+
+  .right {
+    gap: var(--space-2);
+  }
+}
+
+@media (max-width: 480px) {
+  .pageTitle {
+    font-size: var(--fs-sm);
+  }
+}

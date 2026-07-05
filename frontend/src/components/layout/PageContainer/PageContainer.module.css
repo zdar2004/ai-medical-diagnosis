@@ -1,0 +1,17 @@
+.container {
+  flex: 1;
+  min-width: 0;
+  background-color: var(--color-bg);
+}
+
+.inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-7) var(--space-6);
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding: var(--space-5) var(--space-4);
+  }
+}

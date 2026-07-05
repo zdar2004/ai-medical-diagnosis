@@ -225,3 +225,12 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ==========================================
+# Risk Assessment Generated Files
+# ==========================================
+
+backend/risk_assessment/saved_models/
+backend/risk_assessment/reports/
+backend/risk_assessment/datasets/processed/
+backend/risk_assessment/datasets/interim/

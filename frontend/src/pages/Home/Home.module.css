@@ -1,0 +1,130 @@
+.hero {
+  background-color: var(--color-surface);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.heroInner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-5) var(--space-7);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-3);
+}
+
+.title {
+  font-size: var(--fs-3xl);
+  max-width: 18ch;
+  color: var(--color-ink);
+}
+
+.lead {
+  font-size: var(--fs-md);
+  max-width: 56ch;
+  color: var(--color-ink-muted);
+}
+
+.actions {
+  margin-top: var(--space-6);
+}
+
+.primaryAction {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.primaryAction:hover {
+  background-color: var(--color-primary-dark);
+  text-decoration: none;
+}
+
+.workflow {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-7) var(--space-5);
+}
+
+.workflowHeading {
+  font-size: var(--fs-xl);
+  margin-bottom: var(--space-6);
+}
+
+.steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+.step {
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+.stepIndex {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}
+
+.stepTitle {
+  font-size: var(--fs-md);
+  margin-bottom: var(--space-2);
+}
+
+.step p {
+  margin: 0;
+  font-size: var(--fs-sm);
+}
+
+.notice {
+  background-color: var(--color-primary-tint);
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+.notice p {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-5);
+  font-size: var(--fs-sm);
+  color: var(--color-primary-dark);
+}
+
+@media (max-width: 860px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .heroInner {
+    padding: var(--space-7) var(--space-4) var(--space-6);
+  }
+
+  .title {
+    font-size: var(--fs-2xl);
+    max-width: none;
+  }
+
+  .workflow {
+    padding: var(--space-6) var(--space-4);
+  }
+}
