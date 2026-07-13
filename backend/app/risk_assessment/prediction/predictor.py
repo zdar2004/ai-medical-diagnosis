@@ -138,7 +138,7 @@ class Predictor:
             if self.model is None:
                 self.load_model()
 
-            predicted_class = self.model.predict(input_dataframe)[0]
+            predicted_class = int(self.model.predict(input_dataframe)[0])
 
             probability_dict: Optional[Dict[str, float]] = None
             positive_class_probability: Optional[float] = None

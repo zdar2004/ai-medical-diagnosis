@@ -129,6 +129,7 @@ class PreprocessingPipeline:
             # Step 1: Load the raw dataset.
             loader = DataLoader(self.dataset_path)
             raw_dataframe = loader.load_csv()
+            raw_dataframe = raw_dataframe.drop(columns=["id"], errors="ignore")
 
             # Step 2: Validate the raw dataset.
             validator = DatasetValidator(raw_dataframe, target_column=self.target_column)

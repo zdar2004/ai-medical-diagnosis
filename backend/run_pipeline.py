@@ -204,11 +204,13 @@ class PipelineRunner:
         """
         logger.info("[3/8] Training model '%s'.", model_name)
 
+        processed_data_dir = Path("risk_assessment/datasets/processed") / self.disease_name
+
         training_pipeline = TrainingPipeline(
             disease_name=self.disease_name,
             model_name=model_name,
             target_column=self.target_column,
-            dataset_path=self.dataset_path,
+            processed_data_dir=processed_data_dir,
             save_directory=DEFAULT_SAVED_MODELS_DIR / self.disease_name,
         )
 

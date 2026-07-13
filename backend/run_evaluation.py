@@ -1,42 +1,62 @@
-import joblib
-import pandas as pd
+"""
+Run model evaluation for the Risk Assessment module.
 
-from app.risk_assessment.evaluation.evaluate_model import ModelEvaluator
+Usage:
+    python run_evaluation.py
+"""
 
-MODEL_PATH = "risk_assessment/saved_models/diabetes/diabetes_logistic.pkl"
-
-X_TEST_PATH = "risk_assessment/datasets/processed/diabetes/X_test.csv"
-Y_TEST_PATH = "risk_assessment/datasets/processed/diabetes/y_test.csv"
-
-REPORT_PATH = (
-    "risk_assessment/reports/evaluation/diabetes/logistic_evaluation.json"
+from app.risk_assessment.evaluation.evaluation_pipeline import (
+    EvaluationPipeline,
 )
 
-model = joblib.load(MODEL_PATH)
 
-x_test = pd.read_csv(X_TEST_PATH)
-y_test = pd.read_csv(Y_TEST_PATH).iloc[:, 0]
+def main() -> None:
+    """Run the evaluation pipeline."""
 
-evaluator = ModelEvaluator(
-    model=model,
-    x_test=x_test,
-    y_test=y_test,
+    pipeline = EvaluationPipeline()
+
+    result = pipeline.run(
+    disease_name="hypertension",
     model_name="logistic",
 )
 
-report = evaluator.evaluate()
+    evaluation = result["evaluation"]
+    report_path = result["report_path"]
 
-evaluator.save_report_as_json(
-    report=report,
-    output_path=REPORT_PATH,
-)
+    print("=" * 60)
+    print("EVALUATION COMPLETED")
+    print("=" * 60)
 
-print("=" * 60)
-print("EVALUATION COMPLETED")
-print("=" * 60)
-print(f"Accuracy : {report['accuracy']:.4f}")
-print(f"Precision: {report['precision']:.4f}")
-print(f"Recall   : {report['recall']:.4f}")
-print(f"F1 Score : {report['f1_score']:.4f}")
-print(f"ROC AUC  : {report['roc_auc']:.4f}" if report["roc_auc"] is not None else "ROC AUC  : N/A")
-print(REPORT_PATH)
+    print(f"Accuracy : {evaluation['accuracy']:.4f}")
+    print(f"Precision: {evaluation['precision']:.4f}")
+    print(f"Recall   : {evaluation['recall']:.4f}")
+    print(f"F1 Score : {evaluation['f1_score']:.4f}")
+
+    if evaluation["roc_auc"] is not None:
+        print(f"ROC AUC  : {evaluation['roc_auc']:.4f}")
+    else:
+        print("ROC AUC  : N/A")
+
+    print()
+
+    print("Confusion Matrix")
+    print("-" * 60)
+    print(evaluation["confusion_matrix"])
+
+    print()
+
+    print("Classification Report")
+    print("-" * 60)
+
+    for label, values in evaluation["classification_report"].items():
+        print(f"{label}:")
+        print(values)
+        print()
+
+    print("=" * 60)
+    print(f"Report Saved : {report_path}")
+    print("=" * 60)
+
+
+if __name__ == "__main__":
+    main()
