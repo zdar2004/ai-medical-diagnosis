@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import MainLayout from '../layouts/MainLayout.jsx'
 import DashboardLayout from '../layouts/DashboardLayout/DashboardLayout.jsx'
-
+import ProtectedRoute from "../components/ProtectedRoute";
 import Home from '../pages/Home/Home.jsx'
 import Login from '../pages/Login/Login.jsx'
 import NotFound from '../pages/NotFound/NotFound.jsx'
@@ -26,9 +26,13 @@ const router = createBrowserRouter([
     element: <Login />,
   },
 
-  {
-    element: <DashboardLayout />,
-    children: [
+{
+  element: (
+    <ProtectedRoute>
+      <DashboardLayout />
+    </ProtectedRoute>
+  ),
+  children: [
       { path: '/dashboard', element: <Dashboard /> },
 
       { path: '/patients', element: <Patients /> },

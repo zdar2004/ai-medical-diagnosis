@@ -44,11 +44,23 @@ def _diagnosis_to_response(doc: dict) -> DiagnosisResponse:
         id=str(diagnosis.id),
         patient_id=diagnosis.patient_id,
         symptoms=diagnosis.symptoms,
+
         predicted_disease=diagnosis.predicted_disease,
         confidence_score=diagnosis.confidence_score,
+
         doctor_final_diagnosis=diagnosis.doctor_final_diagnosis,
         doctor_notes=diagnosis.doctor_notes,
+
         recommended_tests=diagnosis.recommended_tests,
+        top_predictions=diagnosis.top_predictions,
+        risk_level=diagnosis.risk_level,
+        recommended_specialist=diagnosis.recommended_specialist,
+        hospitalization_required=diagnosis.hospitalization_required,
+        follow_up=diagnosis.follow_up,
+        home_care=diagnosis.home_care,
+        warning_signs=diagnosis.warning_signs,
+        possible_medications=diagnosis.possible_medications,
+
         status=diagnosis.status,
         created_by=diagnosis.created_by,
         created_at=diagnosis.created_at,
@@ -274,6 +286,25 @@ class DiagnosisService:
         # Write recommended_tests from the recommendation engine directly —
         # bypassing the doctor-field status-transition guard intentionally.
         changes["recommended_tests"] = recommendation.recommended_tests
+        changes["top_predictions"] = prediction.top_predictions
+        changes["risk_level"] = recommendation.severity
+        changes["recommended_specialist"] = recommendation.specialist
+        changes["hospitalization_required"] = recommendation.hospitalization_required
+        changes["follow_up"] = recommendation.follow_up
+        changes["home_care"] = recommendation.home_care
+        changes["warning_signs"] = recommendation.warning_signs
+        changes["possible_medications"] = recommendation.possible_medications
+        
+        # Risk level
+        if prediction.confidence >= 80:
+            changes["risk_level"] = "High"
+        elif prediction.confidence >= 50:
+            changes["risk_level"] = "Moderate"
+        else:
+            changes["risk_level"] = "Low"
+
+        # Recommended specialist
+        changes["recommended_specialist"] = recommendation.specialist
         changes["updated_at"] = datetime.now(timezone.utc)
 
         result = await self.diagnoses.find_one_and_update(

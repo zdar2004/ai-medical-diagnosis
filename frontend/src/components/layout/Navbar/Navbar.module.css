@@ -330,3 +330,33 @@
     font-size: var(--fs-sm);
   }
 }
+
+.profile{
+  position: relative;
+}
+
+.profileMenu{
+  position: absolute;
+  top: 58px;
+  right: 0;
+  width: 150px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.15);
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.profileMenu button{
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.profileMenu button:hover{
+  background: #f5f5f5;
+}

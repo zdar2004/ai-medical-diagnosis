@@ -113,7 +113,7 @@ async def ping():
 from app.api.v1.routes import auth, users                          # Phase 2
 from app.api.v1.routes import patients                             # Phase 5
 from app.api.v1.routes import diagnoses                            # Phase 8
-#from app.api.v1.routes import reports                              # Report Analysis
+from app.api.v1.routes import reports                              # Report Analysis
 from app.api.v1.routes import dashboard
 from app.api.v1.routes import risk_assessment                            # Dashboard Analytics
 
@@ -121,7 +121,7 @@ app.include_router(auth.router,      prefix="/api/v1/auth",  tags=["Auth"])
 app.include_router(users.router,     prefix="/api/v1/users", tags=["Users"])
 app.include_router(patients.router,  prefix="/api/v1")             # prefix="/patients" declared on router
 app.include_router(diagnoses.router, prefix="/api/v1")             # prefix="/diagnoses" declared on router
-#app.include_router(reports.router,   prefix="/api/v1")             # prefix="/reports" declared on router
+app.include_router(reports.router,   prefix="/api/v1")             # prefix="/reports" declared on router
 app.include_router(dashboard.router, prefix="/api/v1")             # prefix="/dashboard" declared on router
 app.include_router(
     risk_assessment.router,

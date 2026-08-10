@@ -158,7 +158,7 @@ class LaboratoryValueExtractor:
         
         for param, aliases in self._parameter_aliases.items():
             param_patterns = []
-            for alias in aliases:
+            for alias in sorted(aliases, key=len, reverse=True):
                 # Create pattern that matches parameter with various separators
                 pattern_str = r'{}\s*[:=\-–—.]?\s*'.format(re.escape(alias))
                 param_patterns.append(re.compile(pattern_str, re.IGNORECASE))

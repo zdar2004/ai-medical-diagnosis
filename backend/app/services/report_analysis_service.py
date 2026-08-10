@@ -30,10 +30,7 @@ without cost and discarded afterward — the same pattern used by
 
 import logging
 from pathlib import Path
-
-from app.ai.report_analysis.report_analyzer import medical_report_analyzer
-from app.ai.report_analysis.report_parser import report_parser
-from app.ai.report_analysis.schemas import ReportAnalysisResult, ReportType
+from app.ai.report_analysis.*
 
 # ---------------------------------------------------------------------------
 # Logging

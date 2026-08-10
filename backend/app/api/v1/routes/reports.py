@@ -1,31 +1,29 @@
-"""routes/reports.py
-====================
+"""
+routes/reports.py
+
 FastAPI router for the Medical Report Analysis feature.
 
-Exposes:
-    POST /reports/analyse — accept a PDF or TXT medical report, run the
-                            AI analysis pipeline, return structured findings.
+Endpoint:
+POST /api/v1/reports/analyse
 
-Registered in ``main.py`` under ``/api/v1`` so the full path is:
-    POST /api/v1/reports/analyse
+Accepts:
+- PDF
+- DOCX
+- TXT
+
+The route delegates the actual processing to the existing
+MedicalReportAnalysisService pipeline.
 """
 
 import logging
 
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 
-from app.ai.report_analysis.schemas import ReportAnalysisResult
 from app.core.dependencies import require_roles
 from app.models.user import UserInDB, UserRole
-from app.services.report_analysis_service import (
-    ALLOWED_EXTENSIONS,
-    MAX_FILE_SIZE_BYTES,
-    ReportAnalysisService,
+from app.report_analysis.report_analysis_service import (
+    MedicalReportAnalysisService,
 )
-
-# ---------------------------------------------------------------------------
-# Logging
-# ---------------------------------------------------------------------------
 
 logger = logging.getLogger(__name__)
 
@@ -38,14 +36,16 @@ router = APIRouter(
     tags=["Medical Report Analysis"],
 )
 
+
 # ---------------------------------------------------------------------------
 # Dependency injection
 # ---------------------------------------------------------------------------
 
-
-def _svc() -> ReportAnalysisService:
-    """Instantiate a stateless ReportAnalysisService for this request."""
-    return ReportAnalysisService()
+def _svc() -> MedicalReportAnalysisService:
+    """
+    Create the medical report analysis service for this request.
+    """
+    return MedicalReportAnalysisService()
 
 
 # ---------------------------------------------------------------------------
@@ -54,103 +54,136 @@ def _svc() -> ReportAnalysisService:
 
 @router.post(
     "/analyse",
-    response_model=ReportAnalysisResult,
     status_code=status.HTTP_200_OK,
     summary="Analyse an uploaded medical report",
     responses={
-        400: {"description": "Validation failure — empty file, wrong type, or exceeds size limit"},
-        401: {"description": "Not authenticated"},
-        403: {"description": "Insufficient role"},
-        422: {"description": "Missing or malformed file field"},
-        500: {"description": "Parser or analyser failure — file may be corrupt or unreadable"},
+        400: {
+            "description": (
+                "Invalid file, unsupported format, empty file, "
+                "or file exceeds the size limit."
+            )
+        },
+        401: {
+            "description": "Not authenticated."
+        },
+        403: {
+            "description": "Insufficient role."
+        },
+        422: {
+            "description": "Missing or malformed file field."
+        },
+        500: {
+            "description": "Medical report analysis failed."
+        },
     },
 )
 async def analyse_report(
     file: UploadFile = File(
         ...,
         description=(
-            f"Medical report file to analyse. "
-            f"Accepted formats: {', '.join(sorted(ALLOWED_EXTENSIONS))}. "
-            f"Maximum size: {MAX_FILE_SIZE_BYTES // (1024 * 1024)} MB."
+            "Medical report file. "
+            "Accepted formats: PDF, DOCX, TXT. "
+            "Maximum size: 10 MB."
         ),
     ),
     _user: UserInDB = Depends(
         require_roles(UserRole.ADMIN, UserRole.DOCTOR)
     ),
-    svc: ReportAnalysisService = Depends(_svc),
-) -> ReportAnalysisResult:
+    svc: MedicalReportAnalysisService = Depends(_svc),
+):
     """
-    Upload and analyse a medical report file.
+    Upload and analyse a medical report.
 
-    Runs the complete AI pipeline:
+    Pipeline:
 
-    ```
-    UploadFile → ReportParser (text extraction)
-               → MedicalReportAnalyzer (rule-based findings + summary)
-               → ReportAnalysisResult
-    ```
-
-    **Accepted file types:** `.pdf` · `.txt`
-
-    **Maximum file size:** 10 MB
-
-    **Response includes:**
-    - `abnormal_findings` — findings outside the reference range, ordered by severity
-    - `normal_findings` — findings within the reference range
-    - `unclassified_findings` — findings the engine could not classify (review required)
-    - `summary.overview` — plain-English summary of the report
-    - `summary.critical_alerts` — findings requiring immediate clinical attention
-    - `summary.recommendations` — rule-based suggested next steps
-    - `summary.requires_urgent_review` — `true` if any HIGH or CRITICAL findings exist
-    - `disclaimer` — mandatory statement that results require clinical review
-
-    **Notes:**
-    - Scanned (image-only) PDFs cannot be extracted without OCR — the response
-      will have `extraction_successful: false` and empty findings lists.
-    - All findings are produced by a rule-based engine and **must** be
-      reviewed by a qualified clinician before any clinical decision is made.
-
-    **Role required:** Admin · Doctor
+        UploadFile
+            ↓
+        MedicalReportAnalysisService
+            ↓
+        ReportParser
+            ↓
+        ReportCleaner
+            ↓
+        LaboratoryValueExtractor
+            ↓
+        ReferenceRangeInterpreter
+            ↓
+        AbnormalFindingDetector
+            ↓
+        ClinicalSummaryGenerator
+            ↓
+        ClinicalInsightsGenerator
+            ↓
+        JSON response
     """
-    # ── Read file bytes ───────────────────────────────────────────────────────
-    # UploadFile.read() is async and returns the full content as bytes.
+
+    # -----------------------------------------------------------------------
+    # Read uploaded file
+    # -----------------------------------------------------------------------
+
     try:
         content = await file.read()
+
     except Exception as exc:
-        logger.error("Failed to read uploaded file '%s': %s", file.filename, exc)
+        logger.exception(
+            "Failed to read uploaded report '%s'.",
+            file.filename,
+        )
+
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=f"Could not read uploaded file: {exc}",
-        )
+        ) from exc
+
     finally:
         await file.close()
 
+    filename = file.filename or "upload"
+
     logger.info(
-        "Report upload received: filename=%r  size=%d bytes  content_type=%s",
-        file.filename, len(content), file.content_type,
+        "Medical report uploaded: filename=%r size=%d bytes content_type=%s",
+        filename,
+        len(content),
+        file.content_type,
     )
 
-    # ── Delegate to service ───────────────────────────────────────────────────
+    # -----------------------------------------------------------------------
+    # Analyse using existing report-analysis pipeline
+    # -----------------------------------------------------------------------
+
     try:
-        result = await svc.analyse_upload(
-            content=content,
-            filename=file.filename or "upload",
-            content_type=file.content_type or "",
+        result = svc.analyze_bytes(
+            file_data=content,
+            filename=filename,
         )
+
     except ValueError as exc:
-        # Validation errors: wrong type, size exceeded, empty file
+        logger.warning(
+            "Report validation failed for '%s': %s",
+            filename,
+            exc,
+        )
+
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(exc),
+        ) from exc
+
+    except Exception as exc:
+        logger.exception(
+            "Medical report analysis failed for '%s'.",
+            filename,
         )
-    except RuntimeError as exc:
-        # Parser/analyser failures: corrupt file, unexpected error
-        logger.error(
-            "Runtime error analysing '%s': %s", file.filename, exc
-        )
+
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Report analysis failed: {exc}",
-        )
+        ) from exc
+
+    logger.info(
+        "Medical report analysis completed: filename=%r",
+        filename,
+    )
 
     return result
+

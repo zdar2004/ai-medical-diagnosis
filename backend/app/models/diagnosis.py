@@ -35,6 +35,7 @@ class DiagnosisInDB(BaseModel):
     symptoms: List[str]
 
     # ── AI output (populated by the prediction service) ───────────────────────
+    top_predictions: List[dict] = Field(default_factory=list)
     predicted_disease: Optional[str] = None
     confidence_score: Optional[float] = None   # 0.0 – 1.0
 
@@ -45,6 +46,18 @@ class DiagnosisInDB(BaseModel):
 
     # ── Status ────────────────────────────────────────────────────────────────
     status: DiagnosisStatus = DiagnosisStatus.PENDING
+    risk_level: Optional[str] = None
+    recommended_specialist: Optional[str] = None
+    hospitalization_required: Optional[bool] = None
+    follow_up: Optional[str] = None
+    home_care: List[str] = Field(default_factory=list)
+    warning_signs: List[str] = Field(default_factory=list)
+    possible_medications: List[str] = Field(default_factory=list)
+    
+    # ── Medical Report Analysis ──────────────────────────────────────────────
+    report_filename: Optional[str] = None
+    report_uploaded_at: Optional[datetime] = None
+    report_analysis: Optional[dict] = None
 
     # ── Meta ──────────────────────────────────────────────────────────────────
     created_by: str                          # user _id who created this record
@@ -209,6 +222,7 @@ class DiagnosisResponse(BaseModel):
     symptoms: List[str]
 
     # ── AI output ─────────────────────────────────────────────────────────────
+    top_predictions: List[dict] = Field(default_factory=list)
     predicted_disease: Optional[str] = None
     confidence_score: Optional[float] = None
 
@@ -219,7 +233,19 @@ class DiagnosisResponse(BaseModel):
 
     # ── Status ────────────────────────────────────────────────────────────────
     status: DiagnosisStatus
+    risk_level: Optional[str] = None
+    recommended_specialist: Optional[str] = None
+    hospitalization_required: Optional[bool] = None
+    follow_up: Optional[str] = None
+    home_care: List[str] = []
+    warning_signs: List[str] = []
+    possible_medications: List[str] = []
 
+    # ── Medical Report Analysis ──────────────────────────────────────────────
+    report_filename: Optional[str] = None
+    report_uploaded_at: Optional[datetime] = None
+    report_analysis: Optional[dict] = None
+    
     # ── Meta ──────────────────────────────────────────────────────────────────
     created_by: str
     created_at: datetime

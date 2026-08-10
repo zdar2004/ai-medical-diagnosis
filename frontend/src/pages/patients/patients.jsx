@@ -1,98 +1,6 @@
 import styles from './Patients.module.css'
-
-// Static, illustrative data only — no API, no business logic.
-const PATIENTS = [
-  {
-    id: 'PT-1042',
-    name: 'Amelia Carter',
-    age: 54,
-    gender: 'Female',
-    diagnosis: 'Type 2 Diabetes',
-    status: 'Active',
-    lastVisit: '2026-06-28',
-  },
-  {
-    id: 'PT-1043',
-    name: 'Daniel Osei',
-    age: 67,
-    gender: 'Male',
-    diagnosis: 'Acute Myocardial Infarction',
-    status: 'Critical',
-    lastVisit: '2026-07-01',
-  },
-  {
-    id: 'PT-1044',
-    name: 'Priya Nair',
-    age: 34,
-    gender: 'Female',
-    diagnosis: 'Community-Acquired Pneumonia',
-    status: 'Recovered',
-    lastVisit: '2026-06-15',
-  },
-  {
-    id: 'PT-1045',
-    name: 'Marcus Webb',
-    age: 45,
-    gender: 'Male',
-    diagnosis: 'Hypertension',
-    status: 'Follow-up',
-    lastVisit: '2026-06-30',
-  },
-  {
-    id: 'PT-1046',
-    name: 'Isabella Rossi',
-    age: 29,
-    gender: 'Female',
-    diagnosis: 'Migraine with Aura',
-    status: 'Active',
-    lastVisit: '2026-06-27',
-  },
-  {
-    id: 'PT-1047',
-    name: 'Kenji Watanabe',
-    age: 71,
-    gender: 'Male',
-    diagnosis: 'Chronic Kidney Disease, Stage 3',
-    status: 'Critical',
-    lastVisit: '2026-07-02',
-  },
-  {
-    id: 'PT-1048',
-    name: 'Grace Mensah',
-    age: 38,
-    gender: 'Female',
-    diagnosis: 'Asthma Exacerbation',
-    status: 'Recovered',
-    lastVisit: '2026-06-10',
-  },
-  {
-    id: 'PT-1049',
-    name: 'Tomasz Nowak',
-    age: 58,
-    gender: 'Male',
-    diagnosis: 'Atrial Fibrillation',
-    status: 'Follow-up',
-    lastVisit: '2026-06-24',
-  },
-  {
-    id: 'PT-1050',
-    name: 'Fatima Al-Sayed',
-    age: 62,
-    gender: 'Female',
-    diagnosis: 'Osteoarthritis',
-    status: 'Active',
-    lastVisit: '2026-06-29',
-  },
-  {
-    id: 'PT-1051',
-    name: 'Liam O\u2019Brien',
-    age: 49,
-    gender: 'Male',
-    diagnosis: 'Gastroesophageal Reflux Disease',
-    status: 'Follow-up',
-    lastVisit: '2026-06-21',
-  },
-]
+import { useEffect, useState } from "react";
+import api from "../../services/api";
 
 const STATUS_OPTIONS = ['All Statuses', 'Active', 'Critical', 'Recovered', 'Follow-up']
 
@@ -112,6 +20,24 @@ function StatusBadge({ status }) {
 }
 
 function Patients() {
+  const [patients, setPatients] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadPatients() {
+      try {
+        const response = await api.get("/patients/");
+        console.log(response.data);
+        setPatients(response.data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadPatients();
+  }, []);
   return (
     <div className={styles.page}>
       <section className={styles.header}>
@@ -191,13 +117,13 @@ function Patients() {
                 </tr>
               </thead>
               <tbody>
-                {PATIENTS.map((patient) => (
+                {patients.map((patient) => (
                   <tr key={patient.id}>
                     <td data-label="Patient ID">
                       <span className={styles.patientId}>{patient.id}</span>
                     </td>
                     <td data-label="Full Name">
-                      <span className={styles.patientName}>{patient.name}</span>
+                      <span className={styles.patientName}>{patient.first_name} {patient.last_name}</span>
                     </td>
                     <td data-label="Age">{patient.age}</td>
                     <td data-label="Gender">{patient.gender}</td>

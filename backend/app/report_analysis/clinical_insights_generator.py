@@ -84,8 +84,15 @@ class ClinicalInsightsGenerator:
         insights: List[Dict[str, Any]] = []
 
         # Generate insights from abnormal findings
+        # Generate insights from abnormal findings
         if abnormal_findings:
-            finding_insights = self._generate_insights_from_findings(abnormal_findings)
+
+            if isinstance(abnormal_findings, dict):
+                findings = abnormal_findings.get("abnormal_findings", [])
+            else:
+                findings = abnormal_findings
+
+            finding_insights = self._generate_insights_from_findings(findings)
             insights.extend(finding_insights)
             logger.debug(f"Generated {len(finding_insights)} insights from abnormal findings")
 

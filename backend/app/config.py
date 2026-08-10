@@ -1,7 +1,10 @@
 from functools import lru_cache
 from typing import List
 
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+DEFAULT_GEMINI_MODEL = "gemini-1.5-mini"
 
 
 class Settings(BaseSettings):
@@ -32,7 +35,11 @@ class Settings(BaseSettings):
 
     # Gemini
     gemini_api_key: str = ""
-    gemini_model: str = "gemini-1.5-flash"
+    gemini_model: str = Field(
+        default=DEFAULT_GEMINI_MODEL,
+        alias="GEMINI_MODEL",
+        description="Model name to use with the Gemini provider.",
+    )
 
     # CORS
     allowed_origins: List[str] = [

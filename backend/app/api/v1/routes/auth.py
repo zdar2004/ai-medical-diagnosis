@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, status
+from app.api.dependencies.auth import get_current_active_user
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from app.database import get_database
@@ -50,3 +51,21 @@ async def login(
     svc: AuthService = Depends(_svc),
 ) -> TokenResponse:
     return await svc.login(payload)
+
+@router.get(
+    "/me",
+    response_model=UserResponse,
+    summary="Get current logged-in user",
+)
+async def get_me(
+    current_user=Depends(get_current_active_user),
+):
+    return UserResponse(
+        id=str(current_user["_id"]),
+        full_name=current_user["full_name"],
+        email=current_user["email"],
+        role=current_user["role"],
+        is_active=current_user["is_active"],
+        created_at=current_user["created_at"],
+        last_login=current_user.get("last_login"),
+    )

@@ -31,7 +31,7 @@ from typing import Any, Dict, List
 from app.report_analysis.report_parser import (
     MedicalReportParser,
 )
-from app.report_analysis.providers.dummy_provider import DummyProvider
+from app.ai_clinical_assistant.provider_factory import ProviderFactory
 
 from app.report_analysis.report_cleaner import (
     MedicalReportCleaner,
@@ -133,8 +133,13 @@ class MedicalReportAnalysisService:
             insights_generator:
                 Clinical insights generator.
         """
-        ClinicalSummaryGenerator(
-            provider=DummyProvider()
+        provider=ProviderFactory().get_provider()
+        self.summary_generator = (
+            summary_generator
+            if summary_generator
+            else ClinicalSummaryGenerator(
+                provider=provider
+            )
         )
         self.parser = (
             parser
@@ -164,13 +169,6 @@ class MedicalReportAnalysisService:
             detector
             if detector
             else AbnormalFindingDetector()
-        )
-
-        self.summary_generator = (
-            summary_generator
-            if summary_generator
-            else ClinicalSummaryGenerator(provider=DummyProvider()
-            )
         )
 
         self.insights_generator = (
@@ -525,15 +523,20 @@ class MedicalReportAnalysisService:
         )
 
 
-        abnormal_findings = (
-            self.detector.detect(
-                interpreted_values
-            )
+        abnormal_result = self.detector.detect(
+        interpreted_values
         )
+
+        abnormal_findings = abnormal_result["abnormal_findings"]
+
         print("\n===== DEBUG abnormal_findings =====")
         print(type(abnormal_findings))
         print(abnormal_findings)
-        print(type(abnormal_findings[0]) if abnormal_findings else "EMPTY")
+        print(
+            type(abnormal_findings[0])
+            if abnormal_findings
+            else "EMPTY"
+        )
 
         clinical_summary = self.summary_generator.generate(
             cleaned_text=cleaned_text,
