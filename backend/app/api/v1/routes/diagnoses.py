@@ -1,13 +1,29 @@
-from typing import List, Optional
+"""Diagnosis API routes for creating, retrieving, and updating patient diagnoses."""
 
-from fastapi import APIRouter, Depends, HTTPException, Query, status
-from motor.motor_asyncio import AsyncIOMotorDatabase
+from typing import Any, List, Optional, TYPE_CHECKING
 
-from app.core.dependencies import require_roles
-from app.database import get_database
-from app.models.diagnosis import DiagnosisCreate, DiagnosisResponse, DiagnosisUpdate
-from app.models.user import UserInDB, UserRole
-from app.services.diagnosis_service import DiagnosisService
+from fastapi import APIRouter, Depends, HTTPException, Query, status  # type: ignore[import-not-found]
+
+if TYPE_CHECKING:
+    from motor.motor_asyncio import AsyncIOMotorDatabase  # type: ignore[import-not-found]
+else:
+    AsyncIOMotorDatabase = Any
+
+try:
+    from app.core.dependencies import require_roles
+    from app.database import get_database
+    from app.models.user import UserInDB, UserRole
+    from app.services.diagnosis_service import DiagnosisService
+except ModuleNotFoundError:  # pragma: no cover
+    from backend.app.core.dependencies import require_roles
+    from backend.app.database import get_database
+    from backend.app.models.user import UserInDB, UserRole
+    from backend.app.services.diagnosis_service import DiagnosisService
+
+try:
+    from app.models.diagnosis import DiagnosisCreate, DiagnosisResponse, DiagnosisUpdate
+except ModuleNotFoundError:  # pragma: no cover
+    from backend.app.models.diagnosis import DiagnosisCreate, DiagnosisResponse, DiagnosisUpdate
 
 router = APIRouter(
     prefix="/diagnoses",

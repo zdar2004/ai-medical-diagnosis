@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Model evaluation utilities for the Risk Assessment module.
 
 This module provides a reusable :class:`ModelEvaluator` class that
@@ -12,20 +14,45 @@ import json
 from pathlib import Path
 from typing import Any, Dict, Optional, Union
 
-import numpy as np
-import pandas as pd
-from sklearn.metrics import (
-    accuracy_score,
-    classification_report,
-    confusion_matrix,
-    f1_score,
-    precision_score,
-    recall_score,
-    roc_auc_score,
-)
+try:
+    import numpy as np
+except ImportError:  # pragma: no cover
+    np = None  # type: ignore[assignment]
 
-from app.risk_assessment.utils.file_utils import create_directory
-from app.risk_assessment.utils.logging_utils import get_logger
+try:
+    import pandas as pd
+except ImportError:  # pragma: no cover
+    pd = None  # type: ignore[assignment]
+
+try:
+    from sklearn.metrics import (
+        accuracy_score,
+        classification_report,
+        confusion_matrix,
+        f1_score,
+        precision_score,
+        recall_score,
+        roc_auc_score,
+    )
+except ImportError:  # pragma: no cover
+    accuracy_score = None
+    classification_report = None
+    confusion_matrix = None
+    f1_score = None
+    precision_score = None
+    recall_score = None
+    roc_auc_score = None
+
+try:
+    from app.risk_assessment.utils.file_utils import create_directory
+    from app.risk_assessment.utils.logging_utils import get_logger
+except ImportError:  # pragma: no cover
+    try:
+        from backend.app.risk_assessment.utils.file_utils import create_directory
+        from backend.app.risk_assessment.utils.logging_utils import get_logger
+    except ImportError:  # pragma: no cover
+        from risk_assessment.utils.file_utils import create_directory
+        from risk_assessment.utils.logging_utils import get_logger
 
 logger = get_logger(__name__)
 

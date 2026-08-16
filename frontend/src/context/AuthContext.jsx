@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import api from "../services/api";
+// api import removed because it's not used in this file
 
 const AuthContext = createContext(null);
 
@@ -27,7 +27,7 @@ export function AuthProvider({ children }) {
         if (savedUser) {
           setUser(JSON.parse(savedUser));
         }
-      } catch (err) {
+      } catch {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         setToken(null);

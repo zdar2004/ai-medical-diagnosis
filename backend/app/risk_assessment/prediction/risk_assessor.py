@@ -270,18 +270,18 @@ class RiskAssessmentEngine:
             prediction_result = predictor.predict(
                 processed_input
             )
-            confidence = self._calculate_confidence(prediction_result)
-            risk_level = self._classify_risk_level(confidence)
+            risk_probability = self._calculate_confidence(prediction_result)
+            risk_level = self._classify_risk_level(risk_probability)
 
             print(type(prediction_result["predicted_class"]))
-            print(type(confidence))
+            print(type(risk_probability))
             print(prediction_result)
 
 
             assessment = {
                 "disease": disease_name,
                 "prediction": int(prediction_result["predicted_class"]),
-                "confidence": float(confidence),
+                "confidence": float(risk_probability),
                 "risk_level": risk_level,
                 "model": model_name,
                 "timestamp": datetime.now(timezone.utc).isoformat(),

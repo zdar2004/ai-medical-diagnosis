@@ -1,20 +1,35 @@
 import logging
 import inspect
 from datetime import datetime, timezone
-from typing import List, Optional
+from typing import Any, List, Optional
 
 from bson import ObjectId
-from motor.motor_asyncio import AsyncIOMotorDatabase
 
-from app.ai.inference.predictor import disease_predictor
-from app.ai.inference.recommendation_engine import recommendation_engine
-from app.models.diagnosis import (
-    DiagnosisCreate,
-    DiagnosisInDB,
-    DiagnosisResponse,
-    DiagnosisStatus,
-    DiagnosisUpdate,
-)
+try:
+    from motor.motor_asyncio import AsyncIOMotorDatabase
+except ImportError:  # pragma: no cover - optional dependency for static analysis
+    AsyncIOMotorDatabase = Any  # type: ignore[misc,assignment]
+
+try:
+    from app.ai.inference.predictor import disease_predictor
+    from app.ai.inference.recommendation_engine import recommendation_engine
+    from app.models.diagnosis import (
+        DiagnosisCreate,
+        DiagnosisInDB,
+        DiagnosisResponse,
+        DiagnosisStatus,
+        DiagnosisUpdate,
+    )
+except ImportError:  # pragma: no cover - fallback for repo-root execution
+    from backend.app.ai.inference.predictor import disease_predictor
+    from backend.app.ai.inference.recommendation_engine import recommendation_engine
+    from backend.app.models.diagnosis import (
+        DiagnosisCreate,
+        DiagnosisInDB,
+        DiagnosisResponse,
+        DiagnosisStatus,
+        DiagnosisUpdate,
+    )
 
 logger = logging.getLogger(__name__)
 logger.info(inspect.getfile(recommendation_engine.__class__))

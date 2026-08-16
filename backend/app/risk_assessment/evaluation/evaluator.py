@@ -22,18 +22,18 @@ from typing import Any, Dict, List, Optional, Union
 
 import joblib
 import pandas as pd
-
+from datetime import datetime, timezone
 from app.risk_assessment.evaluation.metrics import EvaluationMetrics
 from app.risk_assessment.utils.logging_utils import get_logger
 
 logger = get_logger(__name__)
 
 DEFAULT_PROCESSED_DATASET_DIR = Path(
-    "risk_assessment/datasets/processed"
+    "backend/app/risk_assessment/datasets/processed"
 )
 
 DEFAULT_SAVED_MODELS_DIR = Path(
-    "risk_assessment/saved_models"
+    "backend/app/risk_assessment/saved_models"
 )
 
 class ModelEvaluator:

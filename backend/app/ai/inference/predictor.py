@@ -27,16 +27,80 @@ Run from the ``backend/`` directory to verify the inference engine::
     python -m app.ai.inference.predictor
 """
 
+import importlib
 import logging
 import sys
 from pathlib import Path
 from typing import Any
 
-import joblib
-import numpy as np
-from app.ai.models.prediction_result import PredictionResult
-from app.ai.providers.gemini_prediction_provider import GeminiPredictionProvider
-from app.ai.utils.text_cleaner import symptoms_to_string
+try:
+    import joblib  # type: ignore[import-not-found]
+except ModuleNotFoundError:  # pragma: no cover - fallback when joblib is unavailable
+    joblib = None  # type: ignore[assignment]
+
+# Load lazily: import the module even when joblib is unavailable, and fail only
+# when model artefacts are actually requested.
+
+try:
+    import numpy as _numpy  # type: ignore[import-not-found]
+except ModuleNotFoundError:  # pragma: no cover - dependency is required at runtime
+    _numpy = None  # type: ignore[assignment]
+
+try:
+    from app.ai.models.prediction_result import PredictionResult
+except ImportError:
+    from dataclasses import dataclass, field
+
+    @dataclass
+    class PredictionResult:
+        disease: str
+        confidence: float
+        top_predictions: list[dict[str, Any]] = field(default_factory=list)
+
+try:
+    from app.ai.providers.gemini_prediction_provider import GeminiPredictionProvider
+except (ImportError, ModuleNotFoundError):  # pragma: no cover - provider is optional at import time
+    class GeminiPredictionProvider:  # type: ignore[no-redef]
+        """Fallback provider used when the Gemini implementation is unavailable."""
+
+        def __init__(self, *args: Any, **kwargs: Any) -> None:
+            self._error = RuntimeError(
+                "Gemini prediction provider is unavailable. "
+                "Install the provider module or ensure the app.ai.providers package is present."
+            )
+
+        def predict(self, *args: Any, **kwargs: Any) -> Any:
+            raise self._error
+
+try:
+    from app.ai.utils.text_cleaner import symptoms_to_string
+except ImportError:  # pragma: no cover - fallback when the utility module is unavailable
+    def symptoms_to_string(symptoms: list[str]) -> str:
+        """Simple fallback symptom normaliser used when the training utility is absent."""
+        if not isinstance(symptoms, list):
+            raise ValueError(
+                f"'symptoms' must be a list of strings, got {type(symptoms).__name__}."
+            )
+
+        cleaned: list[str] = []
+        for symptom in symptoms:
+            if isinstance(symptom, str):
+                text = symptom.strip()
+                if text:
+                    cleaned.append(text.lower())
+
+        return " ".join(cleaned)
+
+if _numpy is not None:
+    np = _numpy
+else:  # pragma: no cover - defensive fallback when NumPy is unavailable
+    class _MissingNumpy:
+        def __getattr__(self, name: str):
+            raise RuntimeError(
+                "NumPy is required for model inference. Install the project dependencies."
+            )
+
+    np = _MissingNumpy()  # type: ignore[assignment]
 
 # ---------------------------------------------------------------------------
 # Logging

@@ -2,10 +2,18 @@ from datetime import datetime, timezone
 from enum import Enum
 from typing import List, Optional
 
-from pydantic import BaseModel, Field, field_validator
+try:
+    # Pydantic v2
+    from pydantic import BaseModel, Field, field_validator  # type: ignore[import-not-found]
+except ImportError:  # pragma: no cover - compatibility with Pydantic v1
+    from pydantic import BaseModel, Field, validator as field_validator  # type: ignore[import-not-found]
 
 # Reuse PyObjectId defined in user.py — single source of truth
-from app.models.user import PyObjectId
+try:
+    from app.models.user import PyObjectId
+except ImportError:
+    from bson import ObjectId
+    PyObjectId = ObjectId
 
 
 # ── Enums ─────────────────────────────────────────────────────────────────────
