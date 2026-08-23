@@ -27,3 +27,7 @@ npm-debug.log*
 
 # OS
 .DS_Store
+
+*.pdf
+*_tree.txt
+report_failure.txt

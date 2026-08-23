@@ -1,13 +1,5 @@
 """
 Gemini-backed provider for the AI Clinical Assistant module.
-
-This module implements GeminiProvider using Google's Gemini API.
-
-Configuration is read from:
-    app.ai_clinical_assistant.config.settings
-
-The Gemini client is initialized lazily and reused for subsequent
-generation requests.
 """
 
 from __future__ import annotations
@@ -15,6 +7,7 @@ from __future__ import annotations
 from typing import Any
 
 from google import genai
+from google.genai import types
 
 from app.ai_clinical_assistant.config import settings
 from app.ai_clinical_assistant.exceptions import (
@@ -34,90 +27,116 @@ class GeminiProvider(BaseProvider):
     """
     LLM provider backed by Google's Gemini API.
 
-    The Gemini client is initialized lazily on the first generation
-    request and then reused.
+    Supports text and multimodal attachments.
     """
 
     def __init__(self) -> None:
-        """
-        Initialize the Gemini provider.
-
-        No API call is made during initialization.
-        """
         self._client: genai.Client | None = None
 
-        logger.info(
-            "GeminiProvider initialized."
-        )
+        logger.info("GeminiProvider initialized.")
 
-    # ---------------------------------------------------------
+    # =========================================================
     # Provider information
-    # ---------------------------------------------------------
+    # =========================================================
 
     def provider_name(self) -> str:
-        """
-        Return the canonical provider name.
-        """
-
         return GEMINI_PROVIDER_NAME
 
-    # ---------------------------------------------------------
+    # =========================================================
     # Availability
-    # ---------------------------------------------------------
+    # =========================================================
 
     def is_available(self) -> bool:
-        """
-        Check whether Gemini is configured.
-
-        Returns:
-            True when both API key and model name are configured.
-        """
-
         return bool(
             settings.gemini_api_key
         ) and bool(
             settings.gemini_model
         )
 
-    # ---------------------------------------------------------
+    # =========================================================
     # Generate
-    # ---------------------------------------------------------
+    # =========================================================
 
     def generate(
         self,
         prompt: str,
+        attachments: list[Any] | None = None,
     ) -> str:
         """
-        Generate a response using Gemini.
-
-        Args:
-            prompt:
-                Complete prompt sent to Gemini.
-
-        Returns:
-            Generated response text.
-
-        Raises:
-            ProviderUnavailableError:
-                Gemini is not configured.
-
-            ProviderError:
-                Gemini request fails or returns empty output.
+        Generate a Gemini response using text and optional attachments.
         """
 
         self.validate_prompt(prompt)
 
         client = self._get_client()
 
+        contents: list[Any] = []
+
+        # -----------------------------------------------------
+        # Add multimodal attachments
+        # -----------------------------------------------------
+
+        if attachments:
+
+            for attachment in attachments:
+
+                logger.info(
+                    "Adding attachment to Gemini request: "
+                    "filename='%s', type='%s', size=%d bytes.",
+                    attachment.filename,
+                    attachment.content_type,
+                    len(attachment.data),
+                )
+
+                # TXT files are converted into text so the model receives
+                # their contents directly.
+                if attachment.content_type == "text/plain":
+
+                    try:
+                        text_content = attachment.data.decode(
+                            "utf-8",
+                            errors="replace",
+                        )
+
+                    except Exception as error:
+                        raise ProviderError(
+                            f"Failed to decode text file '{attachment.filename}'.",
+                            provider_name=GEMINI_PROVIDER_NAME,
+                        ) from error
+
+                    contents.append(
+                        f"\n\n--- BEGIN FILE: {attachment.filename} ---\n"
+                        f"{text_content}\n"
+                        f"--- END FILE: {attachment.filename} ---\n"
+                    )
+
+                    continue
+
+                # Images and PDFs are passed directly to Gemini.
+                contents.append(
+                    types.Part.from_bytes(
+                        data=attachment.data,
+                        mime_type=attachment.content_type,
+                    )
+                )
+
+        # -----------------------------------------------------
+        # Add user prompt last
+        # -----------------------------------------------------
+
+        contents.append(prompt)
+
         try:
             logger.info(
-                "Generating Gemini response using model '%s'.",
+                "Generating Gemini response using model '%s' "
+                "with %d attachment(s).",
                 settings.gemini_model,
+                len(attachments or []),
             )
 
             response = client.models.generate_content(
                 model=settings.gemini_model,
-                contents=prompt,
+                contents=contents,
             )
 
         except Exception as error:
@@ -152,24 +171,11 @@ class GeminiProvider(BaseProvider):
 
         return generated_text.strip()
 
-    # ---------------------------------------------------------
+    # =========================================================
     # Client initialization
-    # ---------------------------------------------------------
+    # =========================================================
 
     def _get_client(self) -> genai.Client:
-        """
-        Lazily initialize and return the Gemini client.
-
-        Returns:
-            Initialized Gemini client.
-
-        Raises:
-            ProviderUnavailableError:
-                API key or model configuration is missing.
-
-            ProviderError:
-                Gemini client initialization fails.
-        """
 
         if self._client is not None:
             return self._client
@@ -187,6 +193,7 @@ class GeminiProvider(BaseProvider):
             )
 
         try:
+
             self._client = genai.Client(
                 api_key=settings.gemini_api_key
             )
@@ -198,6 +205,7 @@ class GeminiProvider(BaseProvider):
             return self._client
 
         except Exception as error:
+
             logger.exception(
                 "Failed to initialize Gemini client."
             )
@@ -206,4 +214,3 @@ class GeminiProvider(BaseProvider):
                 "Failed to initialize Gemini client.",
                 provider_name=GEMINI_PROVIDER_NAME,
             ) from error
-

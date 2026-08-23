@@ -45,7 +45,7 @@ class ContextBuilder:
         self._memory: ConversationMemory = memory
         logger.info("ContextBuilder initialized.")
 
-    def build_context(
+    async def build_context(
         self,
         conversation_id: str | None,
         context: ConversationContext | None,
@@ -94,7 +94,7 @@ class ContextBuilder:
             report_section = self._build_report_section(context)
             logger.info("Report section built.")
 
-            conversation_section = self._build_conversation_section(conversation_id)
+            conversation_section = await self._build_conversation_section(conversation_id)
             logger.info("Conversation history loaded.")
 
             merged_context = self._merge_sections(
@@ -217,7 +217,7 @@ class ContextBuilder:
 
         return section
 
-    def _build_conversation_section(self, conversation_id: str | None) -> dict[str, Any]:
+    async def _build_conversation_section(self, conversation_id: str | None) -> dict[str, Any]:
         """Build the conversation history section.
 
         Args:
@@ -232,10 +232,10 @@ class ContextBuilder:
             ``conversation_id`` is ``None`` or does not correspond to an
             existing conversation.
         """
-        if conversation_id is None or not self._memory.conversation_exists(conversation_id):
+        if conversation_id is None or not await self._memory.conversation_exists(conversation_id):
             return {"conversation_history": []}
 
-        recent_messages = self._memory.get_recent_messages(conversation_id)
+        recent_messages = await self._memory.get_recent_messages(conversation_id)
         conversation_history = [
             {"role": message.role, "content": message.content} for message in recent_messages
         ]

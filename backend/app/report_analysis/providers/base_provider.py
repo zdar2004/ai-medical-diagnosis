@@ -7,6 +7,7 @@ input validation is not duplicated across every concrete provider.
 """
 
 from abc import ABC, abstractmethod
+from typing import Any
 
 from app.ai_clinical_assistant.exceptions import InvalidUserInputError
 from app.risk_assessment.utils.logging_utils import get_logger
@@ -30,7 +31,11 @@ class BaseProvider(ABC):
     """
 
     @abstractmethod
-    def generate(self, prompt: str) -> str:
+    def generate(
+        self,
+        prompt: str,
+        attachments: list[Any] | None = None,
+    ) -> str:
         """Generate a response for the given prompt.
 
         Concrete implementations are responsible for calling
@@ -40,6 +45,7 @@ class BaseProvider(ABC):
 
         Args:
             prompt: The complete prompt text to send to the provider.
+            attachments: A list of attachment objects to include with the prompt.
 
         Returns:
             str: The generated response text.

@@ -9,8 +9,8 @@ singleton, :data:`settings`.
 
 from typing import Any
 
-from pydantic import Field, field_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import Field, field_validator  # pyright: ignore[reportMissingImports]  # pylint: disable=import-error
+from pydantic_settings import BaseSettings, SettingsConfigDict  # pyright: ignore[reportMissingImports]  # pylint: disable=import-error
 
 from app.ai_clinical_assistant.exceptions import ConfigurationError
 from app.ai_clinical_assistant.schemas import (
@@ -59,7 +59,6 @@ class AIClinicalAssistantConfig(BaseSettings):
         description="Name of the LLM provider to use: 'dummy', 'gemini', or 'openai'.",
     )
     gemini_api_key: str = Field(default="", alias="GEMINI_API_KEY")
-    gemini_model: str = Field(default="gemini-2.5-flash", alias="GEMINI_MODEL")
     openai_api_key: str | None = Field(
         default=None,
         description="API key for the OpenAI provider.",
