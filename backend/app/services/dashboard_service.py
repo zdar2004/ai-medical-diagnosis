@@ -12,6 +12,8 @@ request, which would be prohibitively slow.
 """
 
 import logging
+from pathlib import Path
+import joblib
 from calendar import month_abbr
 from datetime import datetime, timezone
 from typing import Optional
@@ -22,6 +24,7 @@ from app.models.dashboard import (
     DashboardSummary,
     DiseaseCount,
     DiseaseDistribution,
+    ModelMetric,
     ModelPerformance,
     MonthlyAnalytics,
     MonthlyDataPoint,
@@ -49,86 +52,115 @@ _MODEL_METRICS_CACHE: Optional[ModelPerformance] = None
 
 
 def _load_model_metrics() -> ModelPerformance:
-    """Load ML model artefacts and compute evaluation metrics.
+    """Load saved multi-model training performance metrics."""
 
-    Runs the full :func:`~app.ai.evaluation.evaluate_model.evaluate` pipeline
-    against the trained model and returns a :class:`~models.dashboard.ModelPerformance`
-    instance.  The result is cached at module level so this expensive
-    operation only runs once per process lifetime.
-
-    Returns:
-        :class:`ModelPerformance` with metrics populated on success,
-        or with ``metrics_available=False`` and a note on failure.
-    """
     global _MODEL_METRICS_CACHE
 
     if _MODEL_METRICS_CACHE is not None:
         logger.debug("Returning cached model metrics.")
         return _MODEL_METRICS_CACHE
 
-    logger.info("Computing model performance metrics (first request — will be cached).")
+    logger.info("Loading saved multi-model performance metrics.")
 
     try:
-        import joblib
-        from pathlib import Path
+        backend_dir = Path(__file__).resolve().parents[2]
 
-        from app.ai.evaluation.evaluate_model import evaluate, load_dataset, load_models
+        performance_path = (
+            backend_dir
+            / "app"
+            / "ai"
+            / "models"
+            / "model_performance.pkl"
+        )
 
-        classifier, vectorizer, encoder = load_models()
-        X, y = load_dataset()
-        result = evaluate(classifier, vectorizer, encoder, X, y)
+        if not performance_path.exists():
+            raise FileNotFoundError(
+                f"Performance file not found: {performance_path}"
+            )
 
-        model_name = type(classifier).__name__
-        n_classes   = len(encoder.classes_)
+        performance_data = joblib.load(performance_path)
+
+        results = [
+            ModelMetric(
+                model=item["model"],
+                accuracy=round(item["accuracy"], 4),
+                precision=round(item["precision"], 4),
+                recall=round(item["recall"], 4),
+                f1_score=round(item["f1_score"], 4),
+            )
+            for item in performance_data.get("results", [])
+        ]
 
         _MODEL_METRICS_CACHE = ModelPerformance(
-            model_name=model_name,
-            model_version=_DASHBOARD_VERSION,
-            disease_classes=n_classes,
-            accuracy=round(result.accuracy, 4),
-            precision=round(result.precision, 4),
-            recall=round(result.recall, 4),
-            f1_score=round(result.f1, 4),
+            best_model=performance_data.get(
+                "best_model",
+                "Unknown",
+            ),
+            disease_classes=performance_data.get(
+                "disease_classes",
+                0,
+            ),
+            total_samples=performance_data.get(
+                "total_samples",
+                0,
+            ),
+            training_samples=performance_data.get(
+                "training_samples",
+                0,
+            ),
+            testing_samples=performance_data.get(
+                "testing_samples",
+                0,
+            ),
+            results=results,
             metrics_available=True,
             metrics_note=None,
         )
+
         logger.info(
-            "Model metrics computed: model=%s  accuracy=%.4f  f1=%.4f",
-            model_name, result.accuracy, result.f1,
+            "Loaded performance metrics for %d models. Best model: %s",
+            len(results),
+            _MODEL_METRICS_CACHE.best_model,
         )
 
     except FileNotFoundError as exc:
-        logger.warning("Model artefacts not found — metrics unavailable: %s", exc)
+        logger.warning(
+            "Model performance file not found: %s",
+            exc,
+        )
+
         _MODEL_METRICS_CACHE = ModelPerformance(
-            model_name="Unknown",
-            model_version=_DASHBOARD_VERSION,
+            best_model="Unknown",
             disease_classes=0,
-            accuracy=None,
-            precision=None,
-            recall=None,
-            f1_score=None,
+            total_samples=0,
+            training_samples=0,
+            testing_samples=0,
+            results=[],
             metrics_available=False,
             metrics_note=(
-                "Model artefacts not found. "
-                "Run 'python -m app.ai.training.train_model' to generate them."
+                "Training performance metrics not found. "
+                "Run the model training pipeline first."
             ),
         )
+
     except Exception as exc:
-        logger.exception("Unexpected error computing model metrics: %s", exc)
+        logger.exception(
+            "Unexpected error loading model performance: %s",
+            exc,
+        )
+
         _MODEL_METRICS_CACHE = ModelPerformance(
-            model_name="Unknown",
-            model_version=_DASHBOARD_VERSION,
+            best_model="Unknown",
             disease_classes=0,
-            accuracy=None,
-            precision=None,
-            recall=None,
-            f1_score=None,
+            total_samples=0,
+            training_samples=0,
+            testing_samples=0,
+            results=[],
             metrics_available=False,
             metrics_note=f"Metrics unavailable: {exc}",
         )
 
     return _MODEL_METRICS_CACHE
-
 
 # ---------------------------------------------------------------------------
 # DashboardService

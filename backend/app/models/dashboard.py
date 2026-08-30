@@ -140,54 +140,86 @@ class MonthlyAnalytics(BaseModel):
 # GET /model-performance
 # ---------------------------------------------------------------------------
 
-class ModelPerformance(BaseModel):
-    """Current ML model identity and evaluation metrics."""
+class ModelMetric(BaseModel):
+    """Performance metrics for a single trained ML model."""
 
-    model_name: str = Field(
+    model: str = Field(
         ...,
-        description="Scikit-learn class name of the trained classifier.",
+        description="Human-readable name of the trained model.",
     )
-    model_version: str = Field(
+
+    accuracy: float = Field(
         ...,
-        description="Semver version string of the training pipeline.",
+        ge=0.0,
+        le=1.0,
+        description="Accuracy on the held-out test split.",
     )
+
+    precision: float = Field(
+        ...,
+        ge=0.0,
+        le=1.0,
+        description="Weighted-average precision.",
+    )
+
+    recall: float = Field(
+        ...,
+        ge=0.0,
+        le=1.0,
+        description="Weighted-average recall.",
+    )
+
+    f1_score: float = Field(
+        ...,
+        ge=0.0,
+        le=1.0,
+        description="Weighted-average F1 score.",
+    )
+
+
+class ModelPerformance(BaseModel):
+    """Performance comparison of all trained ML models."""
+
+    best_model: str = Field(
+        ...,
+        description="Model with the highest accuracy.",
+    )
+
     disease_classes: int = Field(
         ...,
         ge=0,
-        description="Number of unique disease classes the model can predict.",
+        description="Number of unique disease classes.",
     )
-    accuracy: Optional[float] = Field(
-        default=None,
-        ge=0.0,
-        le=1.0,
-        description="Accuracy on the held-out test split (0.0–1.0).",
+
+    total_samples: int = Field(
+        ...,
+        ge=0,
+        description="Total dataset samples used during training.",
     )
-    precision: Optional[float] = Field(
-        default=None,
-        ge=0.0,
-        le=1.0,
-        description="Weighted-average precision across all disease classes.",
+
+    training_samples: int = Field(
+        ...,
+        ge=0,
+        description="Number of training samples.",
     )
-    recall: Optional[float] = Field(
-        default=None,
-        ge=0.0,
-        le=1.0,
-        description="Weighted-average recall across all disease classes.",
+
+    testing_samples: int = Field(
+        ...,
+        ge=0,
+        description="Number of testing samples.",
     )
-    f1_score: Optional[float] = Field(
-        default=None,
-        ge=0.0,
-        le=1.0,
-        description="Weighted-average F1-score across all disease classes.",
+
+    results: list[ModelMetric] = Field(
+        default_factory=list,
+        description="Performance metrics for all trained models.",
     )
+
     metrics_available: bool = Field(
         ...,
-        description=(
-            "True if evaluation metrics were computed successfully. "
-            "False when model artefacts are missing or evaluation failed."
-        ),
+        description="Whether saved training metrics are available.",
     )
+
     metrics_note: Optional[str] = Field(
         default=None,
-        description="Human-readable note explaining unavailable metrics.",
+        description="Explanation when metrics are unavailable.",
     )

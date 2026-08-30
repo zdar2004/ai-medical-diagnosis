@@ -238,4 +238,4 @@ backend/risk_assessment/datasets/interim/
 
 *.pdf
 *_tree.txt
-report_failure.txt
+report_failure.txtbackend/app/ai/models/*.pkl
